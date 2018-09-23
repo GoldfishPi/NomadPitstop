@@ -1,15 +1,21 @@
-<nav class="navbar">
-  <div class="logo">Nomad Pitstops</div>
-  <div class="menu">
-    <div class="hamberger" (click)="onClickHamberger($event)">
-      <div></div>
-      <div></div>
-      <div></div>
+<div class="wrap">
+  <nav class="navbar">
+    <div class="logo">Nomad Pitstops</div>
+    <div class="menu">
+      <div class="hamberger" (click)="onClickHamberger($event)">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
+    <ul *ngIf="linksVisible" class="links {{linksState}}" [@openItems]>
+      <li>
+        Log In
+      </li>
+    </ul>
+  </nav>
+  <div class="col">
+    <app-adder></app-adder>
   </div>
-  <ul *ngIf="linksVisible" class="links {{linksState}}" [@openItems]>
-    <li>
-      Log In
-    </li>
-  </ul>
-</nav>
+</div>
+<!-- <app-adder></app-adder> -->
