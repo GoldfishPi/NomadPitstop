@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { trigger, transition, style, animate, group } from '@angular/animations';
 @Component({
   selector: 'app-navbar',
@@ -21,9 +21,10 @@ import { trigger, transition, style, animate, group } from '@angular/animations'
   ]
 })
 export class NavbarComponent implements OnInit {
-  linksVisible:boolean = false;
+  linksVisible = false;
+  @Output() adding: EventEmitter<boolean> = new EventEmitter();
   constructor() {
-    if(window.innerWidth > 600) {
+    if (window.innerWidth > 600) {
       this.linksVisible = true;
     }
   }
@@ -32,6 +33,9 @@ export class NavbarComponent implements OnInit {
   }
   onClickHamberger() {
     this.linksVisible = !this.linksVisible;
+  }
+  onAdding(e) {
+    this.adding.emit(e);
   }
 
 }
