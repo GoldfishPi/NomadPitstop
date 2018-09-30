@@ -1,32 +1,44 @@
 import { Component } from '@angular/core';
+import {trigger, transition, group, query, style, animate} from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.less']
+  styleUrls: ['./app.component.less'],
+  animations: [
+    trigger('routeAnimation', [
+        transition('1 => 2, 2 => 3', [
+            style({ height: '!' }),
+            query(':enter', style({ transform: 'translateX(100%)' })),
+            query(':enter, :leave', style({ position: 'absolute', top: 0, left: 0, right: 0 })),
+            // animate the leave page away
+            group([
+                query(':leave', [
+                    animate('0.3s cubic-bezier(.35,0,.25,1)', style({ transform: 'translateX(-100%)' })),
+                ]),
+                // and now reveal the enter
+                query(':enter', animate('0.3s cubic-bezier(.35,0,.25,1)', style({ transform: 'translateX(0)' }))),
+            ]),
+        ]),
+        transition('3 => 2, 2 => 1', [
+            style({ height: '!' }),
+            query(':enter', style({ transform: 'translateX(-100%)' })),
+            query(':enter, :leave', style({ position: 'absolute', top: 0, left: 0, right: 0 })),
+            // animate the leave page away
+            group([
+                query(':leave', [
+                    animate('0.3s cubic-bezier(.35,0,.25,1)', style({ transform: 'translateX(100%)' })),
+                ]),
+                // and now reveal the enter
+                query(':enter', animate('0.3s cubic-bezier(.35,0,.25,1)', style({ transform: 'translateX(0)' }))),
+            ]),
+        ]),
+    ])
+  ]
 })
 export class AppComponent {
-  latitude = 51.678418;
-  longitude = 7.809007;
-  defaultUI = false;
-  isMarkerPlaceable = false;
-  markers = [];
-  constructor() {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      this.longitude = position.coords.longitude;
-      this.latitude = position.coords.latitude;
-      return position;
-    }.bind(this));
-  }
-  onChooseLocation(e) {
-    if (this.isMarkerPlaceable) {
-      this.markers.push({
-        latitude: e.coords.lat,
-        longitude: e.coords.lng,
-      });
-    }
-  }
-  toggleAdding(e) {
-    this.isMarkerPlaceable = e;
+  constructor() {}
+  getDepth(outlet) {
+    return outlet.activatedRouteData['depth'];
   }
 }

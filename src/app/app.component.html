@@ -1,9 +1,6 @@
 <div class="wrap">
     <app-navbar (adding)="toggleAdding($event)"></app-navbar>
     <div class="col">
-        <app-adder (adding)="toggleAdding($event)"></app-adder>
+        <router-outlet #routerOutlet="outlet"></router-outlet>
     </div>
-    <agm-map [latitude]="latitude" [longitude]="longitude" [streetViewControl]=false [zoomControl]=false [zoom]=15 (mapClick)="onChooseLocation($event)">
-        <agm-marker *ngFor="let marker of markers" [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
-    </agm-map>
 </div>

@@ -1,6 +1,6 @@
 <div class="wrap">
   <nav class="navbar">
-    <div class="logo">Nomad Pitstops</div>
+    <div class="logo"><a routerLink="/">Nomad Pitstops</a></div>
     <div class="menu">
       <div class="hamberger" (click)="onClickHamberger($event)">
         <div></div>
@@ -10,7 +10,7 @@
     </div>
     <ul *ngIf="linksVisible" class="links {{linksState}}" [@openItems]>
       <li>
-        Log In
+        <a routerLink="/login">Log In</a>
       </li>
     </ul>
   </nav>
