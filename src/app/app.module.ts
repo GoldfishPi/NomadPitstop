@@ -10,11 +10,21 @@ import { AdderComponent } from './components/adder/adder.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from './services/auth.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, data: {depth: 1}},
-  {path: 'login', component: LoginComponent, data: {depth: 2}}
+  {path: 'login', component: LoginComponent, data: {depth: 2}},
+  {path: 'signup', component: SignupComponent, data: {depth: 3}},
 ];
+
+export function tokenGetter() {
+  return localStorage.getItem('id_token');
+}
 
 @NgModule({
   declarations: [
@@ -24,9 +34,12 @@ const appRoutes: Routes = [
     AdderComponent,
     HomeComponent,
     LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
@@ -34,9 +47,16 @@ const appRoutes: Routes = [
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBl8LKxRF1gdmnZjW5NHf3DEHcGCa7AVzY',
     }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:3001'],
+        blacklistedRoutes: ['localhost:3001/auth/']
+      }
+    }),
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
