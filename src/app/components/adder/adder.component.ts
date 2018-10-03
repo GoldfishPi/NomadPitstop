@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adder',
@@ -13,7 +14,7 @@ export class AdderComponent implements OnInit {
 
   @Output() adding:EventEmitter<Boolean> = new EventEmitter();
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
   }
@@ -33,5 +34,11 @@ export class AdderComponent implements OnInit {
   }
   expandAdder(event) {
     this.modifier = 'open expand';
+  }
+  onLogin() {
+    this.router.navigate(['/login'])
+  }
+  onSignup() {
+    this.router.navigate(['/signup'])
   }
 }

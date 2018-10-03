@@ -1,6 +1,10 @@
 <div class="adder {{modifier}}">
   <div class="icon" (click)="toggleAdder($event)">{{adderIcon}}</div>
   <div *ngIf="open" class="content" (click)="expandAdder($event)">
-    Please Select A Point
+    <div class="form">
+       <button href="" class="button primary" (click)="onLogin()">Log In</button>
+       <button class="button secoundary" (click)="onSignup()">Sign Up</button>
+      
+    </div>
   </div>
 </div>

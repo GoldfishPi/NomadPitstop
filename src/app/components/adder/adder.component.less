@@ -7,6 +7,7 @@
     width:80px;
     height: 80px;
     border-radius: 50%;
+    overflow: hidden;
 
     pointer-events: all;
     cursor: pointer;
@@ -40,6 +41,12 @@
         grid-area: content;
         color: @primary;
         text-shadow: 1px -1px 0px @contrast, 2px -2px 0px @contrast;
+        justify-self: center;
+        .form {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
     }
 }
 .adder:hover {
@@ -52,7 +59,7 @@
     border-radius: 0;
     right: 0;
     bottom: 0;
-    grid-template-areas: 'icon content';
+    grid-template-areas: 'content';
     .icon {
         width: 50px;
         height: 50px;
