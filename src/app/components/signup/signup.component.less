@@ -1,0 +1,38 @@
+.signup-page {
+    display: grid;
+    grid-template-areas: '. form .';
+    margin-top: 50px;
+    pointer-events: all;
+    form {
+        grid-area: form;
+        display: grid;
+        grid-template-areas: 
+            'email'
+            'username'
+            'password'
+            'repeat'
+            'submit';
+        grid-gap: 20px;;
+        .first {
+            grid-area: first;
+        }
+        .last {
+            grid-area: last;
+        }
+        .username {
+            grid-area: username;
+        }
+        .email {
+            grid-area: email;
+        }
+        .password {
+            grid-area: password;
+        }
+        .repeat {
+            grid-area: repeat;
+        }
+        .submit {
+            grid-area: submit;
+        }
+    }
+}

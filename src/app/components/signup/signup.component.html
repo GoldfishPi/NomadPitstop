@@ -1,3 +1,10 @@
-<p>
-  signup works!
-</p>
+<div class="signup-page">
+    <form class="login-form" (ngSubmit)="onSignupSubmit()">
+      <input class="email"type="text"  [(ngModel)]="email" name="emil" placeholder="email">
+      <input class="username"type="text" [(ngModel)]="username" name="username" placeholder="Username"/>
+      <input class="password"type="password" [(ngModel)]="password" name="password" placeholder="Password"/>
+      <input class="repeat"type="password"[(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
+      <button class="button primary submit">Sign up</button>
+      <!-- <p class="message">Not registered? <a routerLink="/signup">Create an account</a></p> -->
+    </form>
+</div>
