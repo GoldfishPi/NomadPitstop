@@ -32,7 +32,7 @@ export class SignupComponent implements OnInit {
         this.authService.storeUserData(data.token, data.user);
         this.router.navigate(['login']);
       } else {
-        this.router.navigate(['signup']);
+        this.router.navigate(['login']);
       }
     });
   }
