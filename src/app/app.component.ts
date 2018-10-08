@@ -37,7 +37,11 @@ import {trigger, transition, group, query, style, animate} from '@angular/animat
   ]
 })
 export class AppComponent {
-  constructor() {}
+  constructor() {
+    let vh = window.innerHeight * 0.01;
+    // Then we set the value in the --vh custom property to the root of the document
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
   getDepth(outlet) {
     return outlet.activatedRouteData['depth'];
   }
