@@ -7,7 +7,8 @@ app-navbar {
 }
 
 .wrap {
-    height: 100vh;
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
     display: grid;
     grid-template-rows: 80px;
     pointer-events: none;
