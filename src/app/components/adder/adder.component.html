@@ -14,7 +14,11 @@
                 <ng-template #isExpanded>
                     <form (ngSubmit)="onLoginSubmit()">
                         <input type="text" placeholder="Pitstop Name">
-                        <textarea placeholder="Notes"></textarea>
+                        <textarea placeholder="Notes" rows="8"></textarea>
+                        <div class="range">
+                            internet speed : {{internetValue}}
+                            <input type="range" min="0" max="5" value={{internetSpeed}} (input)="onInternetSpeedChange($event)">
+                        </div>
                         <button class="button primary">Add Pitstop</button>
                     </form>
                 </ng-template>

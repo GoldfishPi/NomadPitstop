@@ -73,3 +73,41 @@
 .adder.expand {
     height: 100%;
 }
+
+form {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    * {
+        margin-top: 25px;
+    }
+    .range {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        input {
+            width: 600px;
+        }
+    }
+}
+
+@media screen and (max-width: @mobile) {
+    form {
+        align-self: flex-start;
+        display: flex;
+        flex-direction: column;
+        * {
+            margin-top: 10px;
+        }
+        .range {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+            input {
+                width: 325px;
+            }
+        }
+    }
+}
