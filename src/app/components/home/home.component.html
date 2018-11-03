@@ -1,6 +1,6 @@
-<!-- <div class="col">
+<div class="col">
     <app-adder (adding)="toggleAdding($event)" [point]="point"></app-adder>
-</div> -->
+</div>
 <agm-map [latitude]="latitude" [longitude]="longitude" [streetViewControl]=false [zoomControl]=false [zoom]=15 (mapClick)="onChooseLocation($event)">
     <agm-marker *ngFor="let marker of markers" [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
     <agm-marker *ngIf="point" [latitude]="point.latitude" [longitude]="point.longitude"></agm-marker>

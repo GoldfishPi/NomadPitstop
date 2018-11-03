@@ -2,12 +2,12 @@
 .adder {
     z-index: 500;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    left: 10px;
+    bottom: 100px;
     width:80px;
     height: 80px;
     border-radius: 50%;
-    overflow: hidden;
+    // overflow: hidden;
 
     pointer-events: all;
     cursor: pointer;
@@ -57,8 +57,8 @@
 .adder.open {
     width: 100vw;
     border-radius: 0;
-    right: 0;
-    bottom: 0;
+    left: 0;
+    bottom: 80px;
     grid-template-areas: 'content';
     .icon {
         width: 50px;
@@ -72,6 +72,7 @@
 }
 .adder.expand {
     height: 100%;
+    bottom: 0;
 }
 
 form {
