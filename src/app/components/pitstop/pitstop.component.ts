@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Pitstop } from '../../interfaces/pitstop';
+import { PitstopService } from '../../services/pitstop/pitstop.service';
 
 @Component({
   selector: 'app-pitstop',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pitstop.component.less']
 })
 export class PitstopComponent implements OnInit {
+  @Input()
+  marker: Pitstop;
+  constructor(private pitstopService:PitstopService) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  onDisplay() {
+    console.log('displaying', this.marker);
   }
-
 }

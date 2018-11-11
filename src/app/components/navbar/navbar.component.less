@@ -10,7 +10,7 @@
     grid-template-areas: 'logo logo links';
     color: #c29d52;
     background-color: @background;
-    text-shadow: 1px -1px 0px @contrast, 2px -2px 0px @contrast;
+    text-shadow: -1px 1px 0px @background , -2px 2px 0px @background, -3px 3px 0px @contrast;;;
     -webkit-box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.35);
     -moz-box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.35);
     box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.35);
@@ -23,9 +23,10 @@
         grid-area: logo;
         align-self: center;
         justify-self: left;
-        font-size: 24px;
+        font-size: 1.7rem;
         padding-left: 10px;
         font-weight: bold;
+        letter-spacing: .2rem;
     }
     .logo::before {
         content: ' ';
@@ -67,7 +68,7 @@
                     height: 5px;
                     background-color: @primary;
                     margin-top: 5px;
-                    box-shadow: 1px -1px 0px @contrast, 2px -2px 0px @contrast;
+                    // box-shadow: 1px -1px 0px @contrast, 2px -2px 0px @contrast;
                     
                 }
             }

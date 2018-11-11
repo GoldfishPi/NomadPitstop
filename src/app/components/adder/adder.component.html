@@ -1,4 +1,4 @@
-<div class="adder {{modifier}}">
+<div *ngIf="authService.loggedIn()" class="adder {{modifier}} themed-text">
     <div class="icon" (click)="toggleAdder($event)">{{adderIcon}}</div>
     <div *ngIf="open" class="content">
         <div *ngIf="!loggedIn;else loggedIn" class="form">
@@ -12,12 +12,12 @@
             <ng-template #hasPoint>
                 <button *ngIf="!expanded;else isExpanded" class="button primary" (click)="expandAdder($event)">Add Pitstop</button>
                 <ng-template #isExpanded>
-                    <form (ngSubmit)="onLoginSubmit()">
-                        <input type="text" placeholder="Pitstop Name">
-                        <textarea placeholder="Notes" rows="8"></textarea>
+                    <form (ngSubmit)="onAddPitstop()">
+                        <input type="text" placeholder="Pitstop Name" [(ngModel)]="pitstopName" name="pitstopName">
+                        <textarea placeholder="Notes" rows="8" [(ngModel)]="pitstopNotes" name="pitstopNotes"></textarea>
                         <div class="range">
                             internet speed : {{internetValue}}
-                            <input type="range" min="0" max="5" value={{internetSpeed}} (input)="onInternetSpeedChange($event)">
+                            <input type="range" min="0" max="5" [(ngModel)]="internetSpeed" name="internetSpeed" (input)="onInternetSpeedChange($event)">
                         </div>
                         <button class="button primary">Add Pitstop</button>
                     </form>

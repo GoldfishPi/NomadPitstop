@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { trigger, transition, style, animate, group } from '@angular/animations';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -23,7 +24,7 @@ import { trigger, transition, style, animate, group } from '@angular/animations'
 export class NavbarComponent implements OnInit {
   linksVisible = false;
   @Output() adding: EventEmitter<boolean> = new EventEmitter();
-  constructor() {
+  constructor(private authService: AuthService,) {
     if (window.innerWidth > 600) {
       this.linksVisible = true;
     }
