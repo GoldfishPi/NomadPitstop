@@ -3,7 +3,7 @@ import { User } from '../interfaces/user';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {JwtHelperService } from '@auth0/angular-jwt';
-import {serverUrl} from '../global/global';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
-  ) { }
+  ) { 
+  }
 
   registerUser(user: User) {
     const httpOptions = {
@@ -22,7 +23,7 @@ export class AuthService {
         'Content-Type':  'application/json',
       })
     };
-    return this.http.post<User>(serverUrl + '/users/register', user, httpOptions)
+    return this.http.post<User>(environment.serverUrl + '/users/register', user, httpOptions)
       .pipe(map((res: any) => res));
   }
 
@@ -32,7 +33,7 @@ export class AuthService {
         'Content-Type':  'application/json',
       })
     };
-    return this.http.post<User>(serverUrl + '/users/authenticate', user, httpOptions)
+    return this.http.post<User>(environment.serverUrl + '/users/authenticate', user, httpOptions)
       .pipe(map((res: any) => res));
   }
 
@@ -43,7 +44,7 @@ export class AuthService {
       'Authorization': this.authToken
     };
     const headers = new HttpHeaders(header);
-    return this.http.get(serverUrl + '/users/profile', {headers: headers})
+    return this.http.get(environment.serverUrl + '/users/profile', {headers: headers})
       .pipe(map((res: any) =>  res));
   }
 
@@ -60,7 +61,7 @@ export class AuthService {
       id: id,
       post: post
     };
-    return this.http.post<any>(serverUrl + '/users/posts', req, httpOptions)
+    return this.http.post<any>(environment.serverUrl + '/users/posts', req, httpOptions)
       .pipe(map((res: any) =>  res));
   }
 

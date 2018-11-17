@@ -1,4 +1,4 @@
-<div *ngIf="authService.loggedIn()" class="adder {{modifier}} themed-text">
+<div class="adder {{modifier}} themed-text">
     <div class="icon" (click)="toggleAdder($event)">{{ adderIcon }}</div>
     <div *ngIf="open" class="content">
         <div *ngIf="!loggedIn; else: loggedIn" class="form">

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { serverUrl } from '../../global/global';
 import { Pitstop } from '../../interfaces/pitstop';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +16,7 @@ export class PitstopService {
       })
     };
     return this.http
-      .post<Pitstop>(serverUrl + '/pitstops', pitstop, httpOptions)
+      .post<Pitstop>(environment.serverUrl + '/pitstops', pitstop, httpOptions)
       .pipe(map((res: any) => res));
   }
 
@@ -27,7 +27,7 @@ export class PitstopService {
       })
     };
     return this.http
-        .get<Array<Pitstop>>(serverUrl + '/pitstops',httpOptions)
+        .get<Array<Pitstop>>(environment.serverUrl + '/pitstops',httpOptions)
         .pipe(map((res: any) => res));
   }
   internetWords(val) {
