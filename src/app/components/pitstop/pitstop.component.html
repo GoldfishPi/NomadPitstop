@@ -1,7 +1,7 @@
 <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude" [openInfoWindow]="true">
     <agm-info-window>
         <h2>{{marker.name}}</h2>
-        <p>Internet Connection: {{pitstopService.internetWords(marker.connection)}}</p>
+        <p>Internet Connection: {{getWords(marker)}}</p>
         <p *ngIf="marker.notes">Notes: {{marker.notes}}</p>
     </agm-info-window>
 </agm-marker>

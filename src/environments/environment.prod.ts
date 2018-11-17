@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverUrl: '68.183.162.241'
+  serverUrl: 'http://68.183.162.241:3000'
 };

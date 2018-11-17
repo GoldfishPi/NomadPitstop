@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
   }
-  onClickHamberger() {
+  onClickHamberger(e) {
     this.linksVisible = !this.linksVisible;
   }
   onAdding(e) {

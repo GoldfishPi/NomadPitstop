@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.less']
 })
 export class SignupComponent implements OnInit {
-  private email;
-  private username;
-  private password;
-  private confirmPassword;
-  private user: User;
+  email;
+  username;
+  password;
+  confirmPassword;
+  user: User;
 
   constructor(private authService: AuthService, private router: Router) { }
 

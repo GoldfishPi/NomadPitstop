@@ -13,4 +13,8 @@ export class PitstopComponent implements OnInit {
     constructor(private pitstopService: PitstopService) {}
 
     ngOnInit() {}
+
+    getWords(marker) {
+        return this.pitstopService.internetWords(marker.connection)
+    }
 }
