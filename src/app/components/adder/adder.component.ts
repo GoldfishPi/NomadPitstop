@@ -25,6 +25,8 @@ export class AdderComponent implements OnInit {
 
   @Output()
   adding: EventEmitter<Boolean> = new EventEmitter();
+  @Output()
+  add: EventEmitter<Boolean> = new EventEmitter();
   @Input()
   point: Pitstop;
 
@@ -73,7 +75,12 @@ export class AdderComponent implements OnInit {
       }
       this.modifier = '';
       this.expanded = false;
-      this.pitstopService.addPitstop(pitstop).subscribe();
+      this.open = false;
+      this.adderIcon = '+';
+      this.adding.emit(false);
+      this.pitstopService.addPitstop(pitstop).subscribe(function() {
+          this.add.emit(true);
+      }.bind(this))
   }
   internetWords(val) {
     let out: string;

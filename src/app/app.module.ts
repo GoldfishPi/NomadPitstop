@@ -15,11 +15,15 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
+import { BlogsComponent } from './components/blogs/blogs.component';
+import { BlogComponent } from './components/blogs/blog/blog.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, data: {depth: 1}},
   {path: 'login', component: LoginComponent, data: {depth: 2}},
   {path: 'signup', component: SignupComponent, data: {depth: 3}},
+  {path: 'blog', component: BlogsComponent},
+  {path: 'blog/:id', component: BlogComponent}
 ];
 
 export function tokenGetter() {
@@ -35,6 +39,8 @@ export function tokenGetter() {
     HomeComponent,
     LoginComponent,
     SignupComponent,
+    BlogsComponent,
+    BlogComponent,
   ],
   imports: [
     BrowserModule,

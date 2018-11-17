@@ -1,23 +1,48 @@
 <div *ngIf="authService.loggedIn()" class="adder {{modifier}} themed-text">
-    <div class="icon" (click)="toggleAdder($event)">{{adderIcon}}</div>
+    <div class="icon" (click)="toggleAdder($event)">{{ adderIcon }}</div>
     <div *ngIf="open" class="content">
-        <div *ngIf="!loggedIn;else loggedIn" class="form">
-            <button href="" class="button primary" (click)="onLogin()">Log In</button>
-            <button class="button secoundary" (click)="onSignup()">Sign Up</button>
+        <div *ngIf="!loggedIn; else: loggedIn" class="form">
+            <button href="" class="button primary" (click)="onLogin()">
+                Log In
+            </button>
+            <button class="button secoundary" (click)="onSignup()">
+                Sign Up
+            </button>
         </div>
         <ng-template #loggedIn>
-            <div *ngIf="!point;else hasPoint">
-                Select a point
-            </div>
+            <div *ngIf="!point; else: hasPoint">Select a point</div>
             <ng-template #hasPoint>
-                <button *ngIf="!expanded;else isExpanded" class="button primary" (click)="expandAdder($event)">Add Pitstop</button>
+                <button
+                    *ngIf="!expanded; else: isExpanded"
+                    class="button primary"
+                    (click)="expandAdder($event)"
+                >
+                    Add Pitstop
+                </button>
                 <ng-template #isExpanded>
                     <form (ngSubmit)="onAddPitstop()">
-                        <input type="text" placeholder="Pitstop Name" [(ngModel)]="pitstopName" name="pitstopName">
-                        <textarea placeholder="Notes" rows="8" [(ngModel)]="pitstopNotes" name="pitstopNotes"></textarea>
+                        <input
+                            type="text"
+                            placeholder="Pitstop Name"
+                            [(ngModel)]="pitstopName"
+                            name="pitstopName"
+                        />
+                        <textarea
+                            placeholder="Notes"
+                            rows="8"
+                            [(ngModel)]="pitstopNotes"
+                            name="pitstopNotes"
+                        ></textarea>
                         <div class="range">
-                            internet speed : {{internetValue}}
-                            <input type="range" min="0" max="5" [(ngModel)]="internetSpeed" name="internetSpeed" (input)="onInternetSpeedChange($event)">
+                            internet speed : {{ internetValue }}
+                            <input
+                                type="range"
+                                min="0"
+                                max="5"
+                                [(ngModel)]="internetSpeed"
+                                name="internetSpeed"
+                                (input)="onInternetSpeedChange($event)"
+                            />
                         </div>
                         <button class="button primary">Add Pitstop</button>
                     </form>

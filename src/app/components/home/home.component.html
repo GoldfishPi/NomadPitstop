@@ -1,8 +1,25 @@
 <div class="col">
-    <app-adder (adding)="toggleAdding($event)" [point]="point"></app-adder>
+    <app-adder
+        (adding)="toggleAdding($event)"
+        [point]="point"
+        (add)="addPitstops()"
+    ></app-adder>
 </div>
-<agm-map [latitude]="latitude" [longitude]="longitude" [streetViewControl]=false [zoomControl]=false [zoom]=15 (mapClick)="onChooseLocation($event)">
+<agm-map
+    [latitude]="latitude"
+    [longitude]="longitude"
+    [streetViewControl]="false"
+    [zoomControl]="false"
+    [zoom]="15"
+    (mapClick)="onChooseLocation($event)"
+>
     <app-pitstop *ngFor="let marker of markers" [marker]="marker"></app-pitstop>
-    <agm-marker *ngIf="point" [latitude]="point.latitude" [longitude]="point.longitude"></agm-marker>
+    <agm-marker
+        *ngIf="point"
+        [latitude]="point.latitude"
+        [longitude]="point.longitude"
+    ></agm-marker>
 </agm-map>
-<!-- <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker> -->
+<!--
+    <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
+-->
