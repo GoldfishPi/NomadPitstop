@@ -8,7 +8,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AdderComponent } from './components/adder/adder.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
+import { MapComponent } from './components/map/map.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { FormsModule } from '@angular/forms';
@@ -22,11 +22,12 @@ import { NearComponent } from './components/near/near.component';
 import { NearcardComponent } from './components/near/nearcard/nearcard.component';
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent, data: {depth: 1}},
+  {path: '', component: MapComponent, data: {depth: 1}},
   {path: 'login', component: LoginComponent, data: {depth: 2}},
   {path: 'signup', component: SignupComponent, data: {depth: 3}},
   {path: 'blog', component: BlogsComponent},
-  {path: 'blog/:id', component: BlogComponent}
+  {path: 'blog/:id', component: BlogComponent},
+  {path: 'pitstops/map/:id', component: MapComponent},
 ];
 
 export function tokenGetter() {
@@ -39,7 +40,7 @@ export function tokenGetter() {
     PitstopComponent,
     NavbarComponent,
     AdderComponent,
-    HomeComponent,
+    MapComponent,
     LoginComponent,
     SignupComponent,
     BlogsComponent,

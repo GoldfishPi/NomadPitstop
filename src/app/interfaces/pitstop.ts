@@ -3,5 +3,6 @@ export interface Pitstop {
     notes: String,
     connection: Number,
     longitude: Number,
-    latitude: Number
+    latitude: Number,
+    id: String,
 }

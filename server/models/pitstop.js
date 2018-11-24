@@ -20,6 +20,10 @@ const PitstopSchema = mongoose.Schema({
     latitude: {
         type: Number,
         require: true
+    },
+    id: {
+        type: Number,
+        require: true,
     }
 });
 

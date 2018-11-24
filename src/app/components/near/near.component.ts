@@ -15,15 +15,19 @@ export class NearComponent implements OnInit {
     constructor(private pitStopServerice: PitstopService) {}
 
     ngOnInit() {
-        this.getPitstops();
+        this.getPitstops()
+        
     }
 
     handleAddressChange(event) {}
 
     getPitstops() {
         this.pitStopServerice.getPitstops().subscribe(data => {
-            console.log('got this data', data);
             this.pitstops = data;
+            this.pitstops.map(data => {
+                console.log(data.id)
+            })
+            console.log('got these gosh darn pitstops', this.pitstops)
         });
 
     }

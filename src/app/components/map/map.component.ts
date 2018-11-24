@@ -4,13 +4,14 @@ import { Point } from '../../interfaces/point';
 import { PitstopService } from '../../services/pitstop/pitstop.service';
 import { Pitstop } from '../../interfaces/pitstop';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.less']
+    selector: 'app-map',
+    templateUrl: './map.component.html',
+    styleUrls: ['./map.component.less']
 })
-export class HomeComponent implements OnInit {
+export class MapComponent implements OnInit {
     latitude = 51.678418;
     longitude = 7.809007;
 
@@ -23,8 +24,11 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.addPitstops();
+        this.router.params.subscribe(data => {
+            if(data.id) this.goToPitstop(data.id);
+        });
     }
-    constructor(private pitstopService: PitstopService) {
+    constructor(private pitstopService: PitstopService, private router: ActivatedRoute) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
                 this.longitude = position.coords.longitude;
@@ -42,12 +46,20 @@ export class HomeComponent implements OnInit {
         }
     }
     toggleAdding(e) {
-        console.log(e);
         this.isMarkerPlaceable = e;
     }
     addPitstops() {
         let pitstops = this.pitstopService.getPitstops().subscribe(data => {
             this.markers = data;
+        });
+    }
+    setScreenPosition(longitude, latitude) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+    goToPitstop(id) {
+        this.pitstopService.getPitstopById(id).subscribe(data => {
+            this.setScreenPosition(data.longitude, data.latitude);
         });
     }
 }

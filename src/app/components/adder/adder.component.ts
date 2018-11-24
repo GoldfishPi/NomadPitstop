@@ -71,7 +71,8 @@ export class AdderComponent implements OnInit {
           notes: this.pitstopNotes,
           connection: this.internetSpeed,
           longitude: this.point.longitude,
-          latitude: this.point.latitude
+          latitude: this.point.latitude,
+          id: null,
       }
       this.modifier = '';
       this.expanded = false;

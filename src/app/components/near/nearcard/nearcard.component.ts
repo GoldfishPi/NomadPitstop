@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PitstopService } from 'src/app/services/pitstop/pitstop.service';
+import { Pitstop } from '../../../interfaces/pitstop';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-nearcard',
@@ -7,13 +9,22 @@ import { PitstopService } from 'src/app/services/pitstop/pitstop.service';
     styleUrls: ['./nearcard.component.less']
 })
 export class NearcardComponent implements OnInit {
-    @Input('name') name: String;
-    @Input('internet') internet: String;
-    @Input('info') info: String;
+    name: String;
+    connection: String;
+    notes: String;
+    id: String;
 
-    constructor() {}
+    @Input('pitstop') pitstop: Pitstop;
+
+    constructor(private pitstopServerice: PitstopService, private router: Router) {}
 
     ngOnInit() {
-        console.log('GOT A NAME', this.name);
+        this.name = this.pitstop.name;
+        this.connection = this.pitstopServerice.internetWords(this.pitstop.connection);
+        this.notes = this.pitstop.notes;
+        this.id = this.pitstop.id;
+    }
+    onClick() {
+        this.router.navigateByUrl('/pitstops/map/'+this.id);
     }
 }
