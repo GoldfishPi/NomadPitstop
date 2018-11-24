@@ -25,6 +25,7 @@
     "angular-jwt": "^0.1.10",
     "body-parser": "^1.18.3",
     "core-js": "^2.5.4",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "mongoose": "^5.3.12",
     "rxjs": "^6.0.0",

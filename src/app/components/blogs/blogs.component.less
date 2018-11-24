@@ -27,7 +27,7 @@
             bottom: 0;
             right: 50%;
             background-color: @primary;
-            width:30rem;
+            width:75%;
             transform: translate(50%, 50%);
 
             box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -45,5 +45,16 @@
         .title {
             box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
         }
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .posts {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media only screen and (max-width: 750px) {
+    .posts {
+        grid-template-columns: 1fr;
     }
 }

@@ -3,6 +3,8 @@ const http = require('http');
 const path = require('path');
 const api = require('./server/routes/api');
 const fs = require('fs');
+const cors = require('cors')
+const bodyParser = require('body-parser');
 
 const app = express();
 const mongoose = require('mongoose');
@@ -18,6 +20,8 @@ mongoose.connection.on('connected', function() {
 const port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname+'/dist/nomadpitstops'));
+app.use(cors());
+app.use(bodyParser.json());
 
 app.use('/api', api);
 
