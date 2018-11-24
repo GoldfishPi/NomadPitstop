@@ -17,6 +17,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BlogsComponent } from './components/blogs/blogs.component';
 import { BlogComponent } from './components/blogs/blog/blog.component';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { NearComponent } from './components/near/near.component';
+import { NearcardComponent } from './components/near/nearcard/nearcard.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, data: {depth: 1}},
@@ -41,6 +44,8 @@ export function tokenGetter() {
     SignupComponent,
     BlogsComponent,
     BlogComponent,
+    NearComponent,
+    NearcardComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +66,7 @@ export function tokenGetter() {
       }
     }),
     BrowserAnimationsModule,
+    GooglePlaceModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

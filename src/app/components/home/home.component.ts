@@ -1,8 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { Point } from '../../interfaces/point';
 import { PitstopService } from '../../services/pitstop/pitstop.service';
 import { Pitstop } from '../../interfaces/pitstop';
+import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 
 @Component({
     selector: 'app-home',

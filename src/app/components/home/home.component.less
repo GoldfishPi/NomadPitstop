@@ -1,13 +1,47 @@
-agm-map {
-    height: 100%; /* Fallback for browsers that do not support Custom Properties */
-    // height: calc(var(--vh, 1vh) * 100);
+.main {
     pointer-events: all;
-}
-app-adder {
-    z-index: 500;
-}
-.col {
-    position: absolute;
-    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
     height: 100%;
+    .map {
+        agm-map {
+            height: 100%;
+        }
+    }
+    .near {
+        z-index: 1;
+        width: 100%;
+        -webkit-box-shadow: 1px 0px 7px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 0px 7px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 0px 7px 0px rgba(0,0,0,0.75);
+    }
 }
+// agm-map {
+//     height: 100%; /* Fallback for browsers that do not support Custom Properties */
+//     // height: calc(var(--vh, 1vh) * 100);
+//     pointer-events: all;
+// }
+// app-adder {
+//     z-index: 500;
+// }
+// .col {
+//     position: absolute;
+//     width: 100vw;
+//     height: 100%;
+// }
+
+// .places:hover, .places:active {
+//     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+// }
+
+// @media only screen and (max-width: 900px) {
+//     .places {
+//         width: 95%;
+//     }
+// }
+
+// @media only screen and (max-width: 500px) {
+//     .places {
+//         width: 80%;
+//     }
+// }
