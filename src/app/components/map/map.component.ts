@@ -31,8 +31,7 @@ export class MapComponent implements OnInit {
     constructor(private pitstopService: PitstopService, private router: ActivatedRoute) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
-                this.longitude = position.coords.longitude;
-                this.latitude = position.coords.latitude;
+                this.setScreenPosition(position.coords.longitude, position.coords.latitude)
                 return position;
             }.bind(this)
         );
