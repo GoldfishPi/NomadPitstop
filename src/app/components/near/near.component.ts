@@ -12,6 +12,8 @@ export class NearComponent implements OnInit {
     @ViewChild('placesRef') placesRef: GooglePlaceDirective;
     pitstops: Array<Pitstop>;
 
+    options = {};
+
     constructor(private pitStopServerice: PitstopService) {}
 
     ngOnInit() {
