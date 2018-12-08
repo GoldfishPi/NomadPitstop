@@ -14,7 +14,11 @@ router.post('/', (req, res, next) => {
                 connection: req.body.connection,
                 longitude: req.body.longitude,
                 latitude: req.body.latitude,
-                id: entry[0] ? entry[0].id +1 : 0
+                id: entry[0] ? entry[0].id +1 : 0,
+                loc: {
+                    type: 'Point',
+                    coordinates: [req.body.longitude, req.body.latitude]
+                }
             });
 
             newPitstop.save().then(function(model, b) {
@@ -39,4 +43,27 @@ router.get('/:id', (req, res, next) => {
             res.json(pitstop);
         });
 });
+
+router.post('/radius', (req, res, next) => {
+    model.aggregate(
+        [
+            { "$geoNear": {
+                "near": {
+                    "type": "Point",
+                    "coordinates": [req.body.longitude, req.body.latitude]
+                },
+                "distanceField": "distance",
+                "spherical": true,
+                "maxDistance": milesToRadian(req.body.radius),
+            }}
+        ],
+        function(err, data) {
+            return res.json(data);
+        }
+    )
+});
+var milesToRadian = function(miles){
+    var earthRadiusInMiles = 3959;
+    return miles / earthRadiusInMiles;
+};
 module.exports = router;

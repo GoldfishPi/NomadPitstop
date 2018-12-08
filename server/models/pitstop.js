@@ -24,8 +24,14 @@ const PitstopSchema = mongoose.Schema({
     id: {
         type: Number,
         require: true,
+    },
+    loc: {
+        type: { type: String },
+        coordinates: [Number],
     }
 });
+
+PitstopSchema.index({ "loc": "2dsphere" });
 
 const Pitstop = module.exports = mongoose.model('Pitstop', PitstopSchema);
 
