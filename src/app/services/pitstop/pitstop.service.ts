@@ -47,6 +47,16 @@ export class PitstopService {
             .get<Pitstop>(environment.serverUrl + '/pitstops/'+id, httpOptions)
             .pipe(map((res: any) => res));
     }
+    getNearPitstops(options) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+        return this.http
+            .post<Array<Pitstop>>(environment.serverUrl + '/pitstops/radius/', options, httpOptions)
+            .pipe(map(res => res));
+        }
     internetWords(val) {
         let out: string;
         switch (val) {

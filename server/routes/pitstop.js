@@ -14,7 +14,7 @@ router.post('/', (req, res, next) => {
                 connection: req.body.connection,
                 longitude: req.body.longitude,
                 latitude: req.body.latitude,
-                id: entry[0] ? entry[0].id +1 : 0,
+                id: entry[0] ? entry[0].id + 1 : 0,
                 loc: {
                     type: 'Point',
                     coordinates: [req.body.longitude, req.body.latitude]
@@ -36,33 +36,51 @@ router.get('/', (req, res, next) => {
     });
 });
 router.get('/:id', (req, res, next) => {
-    console.log('id',typeof req.params.id)
-    model
-        .findOne({ id: Number(req.params.id) }, (err, pitstop) => {
-            console.log('got this stop yo', pitstop)
-            res.json(pitstop);
-        });
+    console.log('id', typeof req.params.id);
+    model.findOne({ id: Number(req.params.id) }, (err, pitstop) => {
+        // console.log('got this stop yo', pitstop)
+        res.json(pitstop);
+    });
 });
 
 router.post('/radius', (req, res, next) => {
+    // model.aggregate(
+    //     [
+    //         {
+    //             $geonear: {
+    //                 near: {
+    //                     type: 'Point',
+    //                     coordinates: [req.body.longitude, req.body.latitude]
+    //                 },
+    //                 distanceField: 'distance',
+    //                 spherical: true,
+    //                 maxDistance: req.body.radius * 1609.34
+    //             }
+    //         }
+    //     ],
+    //     function(err, data) {
+    //         console.log('found these', data);
+    //         return res.json(data);
+    //     }
+    // );
     model.aggregate(
         [
             { "$geoNear": {
                 "near": {
-                    "type": "Point",
-                    "coordinates": [req.body.longitude, req.body.latitude]
+                   "type": "Point",
+                    "coordinates": [req.body.longitude,req.body.latitude]
                 },
-                "distanceField": "distance",
-                "spherical": true,
-                "maxDistance": milesToRadian(req.body.radius),
-            }}
+                "distanceField": "dist",
+                "spherical": true
+            }},
+            { "$sort": { "dist": 1, "usecount": -1 } }
         ],
-        function(err, data) {
-            return res.json(data);
+        function(err,results) {
+            res.json(results)
         }
     )
 });
-var milesToRadian = function(miles){
+var milesToRadian = function(miles) {
     var earthRadiusInMiles = 3959;
     return miles / earthRadiusInMiles;
 };

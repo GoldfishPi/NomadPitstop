@@ -13,24 +13,40 @@ export class NearComponent implements OnInit {
     pitstops: Array<Pitstop>;
 
     options = {};
+    longitude: Number;
+    latitude: Number;
 
     constructor(private pitStopServerice: PitstopService) {}
 
     ngOnInit() {
-        this.getPitstops()
-        
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                this.longitude = position.coords.longitude;
+                this.latitude = position.coords.latitude;
+                this.getPitstops()
+                return position;
+            }.bind(this)
+        );
     }
 
     handleAddressChange(event) {}
 
     getPitstops() {
-        this.pitStopServerice.getPitstops().subscribe(data => {
+        this.pitStopServerice.getNearPitstops({
+            longitude: this.longitude,
+            latitude: this.latitude,
+            radius: 5,
+        })
+        .subscribe(data => {
             this.pitstops = data;
-            this.pitstops.map(data => {
-                console.log(data.id)
-            })
-            console.log('got these gosh darn pitstops', this.pitstops)
-        });
+        })
+        // this.pitStopServerice.getPitstops().subscribe(data => {
+        //     this.pitstops = data;
+        //     this.pitstops.map(data => {
+        //         console.log(data.id)
+        //     })
+        //     console.log('got these gosh darn pitstops', this.pitstops)
+        // });
 
     }
 }
