@@ -28,6 +28,7 @@ const appRoutes: Routes = [
   {path: 'blog', component: BlogsComponent},
   {path: 'blog/:id', component: BlogComponent},
   {path: 'pitstops/map/:id', component: MapComponent},
+  {path: 'nearme', component:NearComponent}
 ];
 
 export function tokenGetter() {
@@ -54,7 +55,7 @@ export function tokenGetter() {
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
-      { useHash: false } 
+      { enableTracing: true }
     ),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBl8LKxRF1gdmnZjW5NHf3DEHcGCa7AVzY',

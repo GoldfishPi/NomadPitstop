@@ -13,6 +13,9 @@
                 <a routerLink="/blog">Blog</a>
             </li>
             <li>
+                <a routerLink="nearme" class="near">Nearby</a>
+            </li>
+            <li>
                 <a *ngIf="!authService.loggedIn()" routerLink="/login"
                     >Log In</a
                 >
@@ -25,6 +28,7 @@
                     >Log Out</a
                 >
             </li>
+            
         </ul>
     </nav>
 </div>

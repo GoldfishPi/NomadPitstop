@@ -23,8 +23,10 @@ export class NearcardComponent implements OnInit {
         this.connection = this.pitstopServerice.internetWords(this.pitstop.connection);
         this.notes = this.pitstop.notes;
         this.id = this.pitstop.id;
+        console.log('somthings been created')
     }
     onClick() {
         this.router.navigateByUrl('/pitstops/map/'+this.id);
+        console.log('ive been clicked')
     }
 }
