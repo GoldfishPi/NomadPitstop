@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const mongoose = require('mongoose');
+const appDir = path.resolve( __dirname + "/dist/nomadpitstops" );
 
 let creds = fs.readFileSync('./config.json', 'utf8');
 creds = JSON.parse(creds);
@@ -19,13 +20,16 @@ mongoose.connection.on('connected', function() {
 
 const port = process.env.PORT || 3000;
 
-app.use(express.static(__dirname+'/dist/nomadpitstops'));
+app.use(express.static(appDir));
 app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api', api);
 
-app.get('*', (req, res) => res.sendFile(path.join(__dirname)));
+app.get('*', (req, res) => {
+	res.sendfile( path.resolve( appDir, "index.html" ) );
+        console.log('this is ok');
+});
 
 const server = http.createServer(app);
 
