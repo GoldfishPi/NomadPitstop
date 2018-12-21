@@ -54,7 +54,7 @@ export function tokenGetter() {
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
-      { useHash: true } 
+      { useHash: false } 
     ),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBl8LKxRF1gdmnZjW5NHf3DEHcGCa7AVzY',

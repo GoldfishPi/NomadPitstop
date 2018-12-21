@@ -23,6 +23,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
   linksVisible = false;
+  linksState = 'close'
   @Output() adding: EventEmitter<boolean> = new EventEmitter();
   constructor(private authService: AuthService,) {
     if (window.innerWidth > 600) {
@@ -34,6 +35,11 @@ export class NavbarComponent implements OnInit {
   }
   onClickHamberger(e) {
     this.linksVisible = !this.linksVisible;
+    if (this.linksState === 'open') {
+        this.linksState = 'close'
+    } else {
+        this.linksState = 'open'
+    }
   }
   onAdding(e) {
     this.adding.emit(e);
