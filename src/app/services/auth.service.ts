@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { LOCAL_STORAGE } from '@ng-toolkit/universal';
+import { Injectable, Inject } from '@angular/core';
 import { User } from '../interfaces/user';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import {map} from 'rxjs/operators';
@@ -11,7 +12,7 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   authToken: any;
   user: User;
-  constructor(
+  constructor(@Inject(LOCAL_STORAGE) private localStorage: any, 
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
   ) { 
@@ -56,7 +57,7 @@ export class AuthService {
         'Authorization': this.authToken
       })
     };
-    const id = JSON.parse(localStorage.getItem('user')).id;
+    const id = JSON.parse(this.localStorage.getItem('user')).id;
     const req = {
       id: id,
       post: post
@@ -66,14 +67,14 @@ export class AuthService {
   }
 
   storeUserData(token: any, user: User) {
-    localStorage.setItem('id_token', token);
-    localStorage.setItem('user', JSON.stringify(user));
+    this.localStorage.setItem('id_token', token);
+    this.localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
     this.user = user;
   }
 
   loadToken() {
-    const token = localStorage.getItem('id_token');
+    const token = this.localStorage.getItem('id_token');
     this.authToken = token;
   }
 
@@ -85,6 +86,6 @@ export class AuthService {
   logout() {
     this.authToken = null;
     this.user = null;
-    localStorage.clear();
+    this.localStorage.clear();
   }
 }

@@ -8,30 +8,22 @@
                 <div></div>
             </div>
         </div>
-        <ul class="links {{linksState}}" [@openItems]>
-            <li>
-                <a routerLink="/blog">Blog</a>
-            </li>
-            <li>
-                <a routerLink="/map">Map</a>
-            </li>
-            <li>
-                <a routerLink="nearme" class="near">Nearby</a>
-            </li>
-            <li>
-                <a *ngIf="!authService.loggedIn()" routerLink="/login"
+        <ul class="links {{ linksState }}" [@openItems]>
+            <li><a routerLink="/blog">Blog</a></li>
+            <li><a routerLink="/map">Map</a></li>
+            <li><a routerLink="nearme" class="near">Nearby</a></li>
+            <li><a routerLink="boohg" class="boogh">lol</a></li>
+            <!-- <li>
+                <a routerLink="/login"
                     >Log In</a
                 >
             </li>
             <li>
                 <a
-                    *ngIf="authService.loggedIn()"
-                    (click)="authService.logout()"
                     routerLink="/login"
                     >Log Out</a
                 >
-            </li>
-            
+            </li> -->
         </ul>
     </nav>
 </div>
