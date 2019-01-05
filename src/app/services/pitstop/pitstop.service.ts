@@ -3,11 +3,19 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Pitstop } from '../../interfaces/pitstop';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
 export class PitstopService {
-    constructor(private http: HttpClient) {}
+    httpOptions: Object;
+    constructor(private http: HttpClient) {
+        this.httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+    }
 
     addPitstop(pitstop: Pitstop) {
         const httpOptions = {
@@ -25,17 +33,22 @@ export class PitstopService {
     }
 
     getPitstops() {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        };
-        return this.http
-            .get<Array<Pitstop>>(
-                environment.serverUrl + '/pitstops',
-                httpOptions
-            )
-            .pipe(map((res: any) => res));
+        return new Observable(observer => {
+            if (window.localStorage.getItem('pitstops')) {
+                observer.next(JSON.parse(window.localStorage.getItem('pitstops')));
+            }
+            this.http
+                .get<Array<Pitstop>>(
+                    environment.serverUrl + '/pitstops',
+                    this.httpOptions
+                )
+                .pipe(map((res: any) => res))
+                .subscribe(data => {
+                    window.localStorage.setItem('pitstops', JSON.stringify(data));
+                    observer.next(data);
+                });
+        });
+        return;
     }
     getPitstopById(id) {
         const httpOptions = {
@@ -44,19 +57,30 @@ export class PitstopService {
             })
         };
         return this.http
-            .get<Pitstop>(environment.serverUrl + '/pitstops/'+id, httpOptions)
+            .get<Pitstop>(
+                environment.serverUrl + '/pitstops/' + id,
+                httpOptions
+            )
             .pipe(map((res: any) => res));
     }
     getNearPitstops(options) {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        };
-        return this.http
-            .post<Array<Pitstop>>(environment.serverUrl + '/pitstops/radius/', options, httpOptions)
-            .pipe(map(res => res));
-        }
+        return new Observable(observer => {
+            if (window.localStorage.getItem('pitstops:near')) {
+                observer.next(JSON.parse(window.localStorage.getItem('pitstops:near')));
+            }
+            this.http
+                .post<Array<Pitstop>>(
+                    environment.serverUrl + '/pitstops/radius/',
+                    options,
+                    this.httpOptions
+                )
+                .pipe(map(res => res))
+                .subscribe(data => {
+                    window.localStorage.setItem('pitstops:near', JSON.stringify(data));
+                    observer.next(data);
+                })
+        });
+    }
     internetWords(val) {
         let out: string;
         switch (val) {

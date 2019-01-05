@@ -20,9 +20,12 @@ import { BlogComponent } from './components/blogs/blog/blog.component';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { NearComponent } from './components/near/near.component';
 import { NearcardComponent } from './components/near/nearcard/nearcard.component';
+import { PitstopService } from './services/pitstop/pitstop.service';
+import { LandingComponent } from './components/landing/landing.component';
 
 const appRoutes: Routes = [
-  {path: '', component: MapComponent, data: {depth: 1}},
+  {path: '', component: LandingComponent, data: {depth: 1}},
+  {path: 'map',  component: MapComponent, data: {depth: 1}}
   {path: 'login', component: LoginComponent, data: {depth: 2}},
   {path: 'signup', component: SignupComponent, data: {depth: 3}},
   {path: 'blog', component: BlogsComponent},
@@ -48,6 +51,7 @@ export function tokenGetter() {
     BlogComponent,
     NearComponent,
     NearcardComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,7 @@ export function tokenGetter() {
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true }
+    //   { enableTracing: true }
     ),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBl8LKxRF1gdmnZjW5NHf3DEHcGCa7AVzY',
@@ -70,7 +74,7 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     GooglePlaceModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, PitstopService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
