@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
   linksVisible = false;
   linksState = 'close'
   @Output() adding: EventEmitter<boolean> = new EventEmitter();
-  constructor(private authService: AuthService,) {
+  constructor(public authService: AuthService,) {
     if (window.innerWidth > 600) {
       this.linksVisible = true;
     }

@@ -5,8 +5,8 @@
     (onAddressChange)="handleAddressChange($event)"
     class="places"
 />
-<div class="nearby" *ngFor="let pitstop of pitstops">
-    <app-nearcard
-        [pitstop]='pitstop'
-    ></app-nearcard>
+<div class="cards">
+    <div class="nearby" *ngFor="let pitstop of pitstops">
+        <app-nearcard [pitstop]="pitstop"></app-nearcard>
+    </div>
 </div>
