@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Injectable, Inject } from '@angular/core';
+import { environment } from './../../../environments/environment';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
 export class BlogService {
     serverURL;
     httOptions;
-    constructor(private http: HttpClient) {
+    constructor(@Inject(WINDOW) private window: Window, private http: HttpClient) {
         this.serverURL = environment.serverUrl;
         this.httOptions = {
             headers: new HttpHeaders({
@@ -21,14 +22,14 @@ export class BlogService {
     getBlogs() {
         return new Observable((observer) => {
             const {next, error, complete} = observer;
-            var blogs = JSON.parse(window.localStorage.getItem('blogs'));
+            var blogs = JSON.parse(this.window.localStorage.getItem('blogs'));
             if(blogs)observer.next(blogs);
             this.http
             .get<Array<any>>(this.serverURL + '/blog', this.httOptions)
             .pipe(map((res: any) => res))
             .subscribe(data => {
                 try {
-                    window.localStorage.setItem('blogs', JSON.stringify(data));
+                    this.window.localStorage.setItem('blogs', JSON.stringify(data));
                 } catch (error) {
                     
                 }
@@ -41,7 +42,7 @@ export class BlogService {
         //     .pipe(map((res: any) => res));
     }
     getBlogFromStorage(id) {
-        var blog = JSON.parse(window.localStorage.getItem(`blog:${id}`));
+        var blog = JSON.parse(this.window.localStorage.getItem(`blog:${id}`));
         console.log('blog', blog);
         return blog;
     }

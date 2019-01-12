@@ -1,0 +1,32 @@
+@import '../../less/main.less';
+.container {
+    margin-top: 1rem;
+    // position: absolute;
+    display: flex;
+    // justify-content: space-between;
+    .btn {
+        display: flex;
+        cursor: pointer;
+        margin-right: 1rem;
+        padding: .5rem 1rem;
+        background-color: @background;
+        // border-radius: 100%;
+        color: @primary;
+        font-size: 1rem;
+        transition: all .5s;
+        // min-width: 1rem;
+        max-width: 1rem;
+        overflow: hidden;
+        i {
+            font-size: 1.5rem;
+        }
+        .content {
+            margin-left: 2rem;
+            // display: none;
+            // visibility: hidden;
+        }
+    }
+    .btn:hover {
+        max-width: 100rem;
+    }
+}

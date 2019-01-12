@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
-import { PitstopService } from 'src/app/services/pitstop/pitstop.service';
+import { PitstopService } from '../../services/pitstop/pitstop.service';
 import { Pitstop } from '../../interfaces/pitstop';
 
 @Component({
@@ -37,7 +37,7 @@ export class NearComponent implements OnInit {
             latitude: this.latitude,
             radius: 5,
         })
-        .subscribe(data => {
+        .subscribe((data:Array<Pitstop>) => {
             this.pitstops = data;
         })
         // this.pitStopServerice.getPitstops().subscribe(data => {

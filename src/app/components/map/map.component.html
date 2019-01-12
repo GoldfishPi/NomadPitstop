@@ -1,5 +1,34 @@
 <div class="main">
-    <div class="near"><app-near></app-near></div>
+    <app-near></app-near>
+    <!-- <div></div> -->
+    <div class="col">
+            <agm-map
+            [latitude]="latitude"
+            [longitude]="longitude"
+            [streetViewControl]="false"
+            [zoomControl]="false"
+            [zoom]="15"
+            (mapClick)="onChooseLocation($event)"
+        >
+            <app-pitstop
+                *ngFor="let marker of markers"
+                [marker]="marker"
+            ></app-pitstop>
+            <agm-marker
+                *ngIf="point"
+                [latitude]="point.latitude"
+                [longitude]="point.longitude"
+            ></agm-marker>
+        </agm-map>
+
+        <app-adder
+            (adding)="toggleAdding($event)"
+            [point]="point"
+            (add)="addPitstops()"
+        ></app-adder>
+    </div>
+
+    <!-- <div class="near"><app-near></app-near></div>
     <div class="map">
         <div class="col">
             <app-adder
@@ -26,5 +55,14 @@
                 [longitude]="point.longitude"
             ></agm-marker>
         </agm-map>
-    </div>
+    </div> -->
 </div>
+
+<!-- <agm-map
+            [latitude]="latitude"
+            [longitude]="longitude"
+            [streetViewControl]="false"
+            [zoomControl]="false"
+            [zoom]="15"
+            (mapClick)="onChooseLocation($event)"
+        ></agm-map> -->

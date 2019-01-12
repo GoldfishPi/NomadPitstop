@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogService } from 'src/app/services/blog/blog.service';
+import { BlogService } from '../../services/blog/blog.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,7 +16,7 @@ export class LandingComponent implements OnInit {
     }
 
     getBlogs() {
-        this.blogService.getBlogs().subscribe((data) => {
+        this.blogService.getBlogs().subscribe((data:any) => {
             console.log(data);
             this.blogs = data.posts;
         });

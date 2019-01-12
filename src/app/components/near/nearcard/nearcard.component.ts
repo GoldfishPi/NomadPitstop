@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PitstopService } from 'src/app/services/pitstop/pitstop.service';
+import { PitstopService } from '../../../services/pitstop/pitstop.service';
 import { Pitstop } from '../../../interfaces/pitstop';
 import { Router } from '@angular/router';
 

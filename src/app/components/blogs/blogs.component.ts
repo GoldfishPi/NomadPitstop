@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogService } from 'src/app/services/blog/blog.service';
-import {base64Img } from 'base64-img';
+import { BlogService } from '../../services/blog/blog.service';
 
 @Component({
     selector: 'app-blogs',
@@ -18,7 +17,7 @@ export class BlogsComponent implements OnInit {
     }
     getPosts() {
         this.blogService.getBlogs()
-            .subscribe(data => {
+            .subscribe((data:any) => {
                 console.log('ok')
                 this.posts = data.posts;
             })

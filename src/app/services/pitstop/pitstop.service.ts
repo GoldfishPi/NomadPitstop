@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Injectable, Inject } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Pitstop } from '../../interfaces/pitstop';
-import { environment } from 'src/environments/environment';
+import { environment } from './../../../environments/environment';
 import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
 export class PitstopService {
     httpOptions: Object;
-    constructor(private http: HttpClient) {
+    constructor(@Inject(WINDOW) private window: Window, private http: HttpClient) {
         this.httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
@@ -34,8 +35,8 @@ export class PitstopService {
 
     getPitstops() {
         return new Observable(observer => {
-            if (window.localStorage.getItem('pitstops')) {
-                observer.next(JSON.parse(window.localStorage.getItem('pitstops')));
+            if (this.window.localStorage.getItem('pitstops')) {
+                observer.next(JSON.parse(this.window.localStorage.getItem('pitstops')));
             }
             this.http
                 .get<Array<Pitstop>>(
@@ -44,11 +45,10 @@ export class PitstopService {
                 )
                 .pipe(map((res: any) => res))
                 .subscribe(data => {
-                    window.localStorage.setItem('pitstops', JSON.stringify(data));
+                    this.window.localStorage.setItem('pitstops', JSON.stringify(data));
                     observer.next(data);
                 });
         });
-        return;
     }
     getPitstopById(id) {
         const httpOptions = {
@@ -65,8 +65,8 @@ export class PitstopService {
     }
     getNearPitstops(options) {
         return new Observable(observer => {
-            if (window.localStorage.getItem('pitstops:near')) {
-                observer.next(JSON.parse(window.localStorage.getItem('pitstops:near')));
+            if (this.window.localStorage.getItem('pitstops:near')) {
+                observer.next(JSON.parse(this.window.localStorage.getItem('pitstops:near')));
             }
             this.http
                 .post<Array<Pitstop>>(
@@ -76,7 +76,7 @@ export class PitstopService {
                 )
                 .pipe(map(res => res))
                 .subscribe(data => {
-                    window.localStorage.setItem('pitstops:near', JSON.stringify(data));
+                    this.window.localStorage.setItem('pitstops:near', JSON.stringify(data));
                     observer.next(data);
                 })
         });

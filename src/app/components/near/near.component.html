@@ -1,12 +1,14 @@
-<input
-    ngx-google-places-autocomplete
-    [options]="options"
-    #placesRef="ngx-places"
-    (onAddressChange)="handleAddressChange($event)"
-    class="places"
-/>
-<div class="cards">
-    <div class="nearby" *ngFor="let pitstop of pitstops">
-        <app-nearcard [pitstop]="pitstop"></app-nearcard>
+<div class="wrap">
+    <input
+        ngx-google-places-autocomplete
+        [options]="options"
+        #placesRef="ngx-places"
+        (onAddressChange)="handleAddressChange($event)"
+        class="places"
+    />
+    <div class="cards">
+        <div class="nearby" *ngFor="let pitstop of pitstops">
+            <app-nearcard [pitstop]="pitstop"></app-nearcard>
+        </div>
     </div>
 </div>

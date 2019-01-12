@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { WINDOW } from '@ng-toolkit/universal';
+import { Component, OnInit, Output, EventEmitter, ViewChild , Inject} from '@angular/core';
 import { User } from '../../interfaces/user';
 import { Point } from '../../interfaces/point';
 import { PitstopService } from '../../services/pitstop/pitstop.service';
@@ -23,12 +24,14 @@ export class MapComponent implements OnInit {
     point: Point;
 
     ngOnInit() {
+        console.log('hello!')
         this.addPitstops();
         this.router.params.subscribe(data => {
             if(data.id) this.goToPitstop(data.id);
         });
     }
-    constructor(private pitstopService: PitstopService, private router: ActivatedRoute) {
+    constructor(@Inject(WINDOW) private window: Window, private pitstopService: PitstopService, private router: ActivatedRoute) {
+        // navigator = window.navigator;
         navigator.geolocation.getCurrentPosition(
             function(position) {
                 this.setScreenPosition(position.coords.longitude, position.coords.latitude)
@@ -48,7 +51,7 @@ export class MapComponent implements OnInit {
         this.isMarkerPlaceable = e;
     }
     addPitstops() {
-        let pitstops = this.pitstopService.getPitstops().subscribe(data => {
+        let pitstops = this.pitstopService.getPitstops().subscribe((data:any) => {
             this.markers = data;
         });
     }
