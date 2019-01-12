@@ -10,7 +10,7 @@ import {NgModule} from '@angular/core';
  bootstrap: [AppComponent],
 
         imports:[
- BrowserModule.withServerTransition({appId: 'nomadpitstops'}),
+ BrowserModule.withServerTransition({appId: 'app-root'}),
  
  AppModule,
  

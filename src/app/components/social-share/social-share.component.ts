@@ -23,7 +23,7 @@ export class SocialShareComponent implements OnInit {
             'Facebook Share',
             'height=450, width=550'
         );
-        if (window) {
+        if (this.window) {
         }
     }
     onTweet() {

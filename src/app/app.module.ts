@@ -57,7 +57,7 @@ export function tokenGetter() {
         NearComponent,
         NearcardComponent,
         LandingComponent,
-        SocialShareComponent,
+        SocialShareComponent
     ],
     imports: [
         CommonModule,
@@ -66,7 +66,13 @@ export function tokenGetter() {
         TransferHttpCacheModule,
         HttpClientModule,
 
-        // BrowserModule.withServerTransition({ appId: 'nomadpitstops' }),
+        CommonModule,
+        NgtUniversalModule,
+
+        TransferHttpCacheModule,
+        HttpClientModule,
+
+        // .withServerTransition({ appId: 'nomadpitstops' }),
         FormsModule,
         HttpClientModule,
         RouterModule.forRoot(
