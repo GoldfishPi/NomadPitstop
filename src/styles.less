@@ -1,13 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'app/less/main';
+html,
 body {
     margin: 0;
     height: 100%;
+    display: flex;
+    flex-direction: column;
     background-color: @background;
-    * .themed-text{
+    * .themed-text {
         font-family: 'Notable', sans-serif;
     }
     .shadow-text {
-        text-shadow: -1px 1px 0px #2B292B, -2px 2px 0px #2B292B, -3px 3px 0px #2B292B, -4px 4px 0px #6e582c;
+        text-shadow: -1px 1px 0px #2b292b, -2px 2px 0px #2b292b,
+            -3px 3px 0px #2b292b, -4px 4px 0px #6e582c;
+    }
+    app-root {
+        
+        height: 100%;
+        max-height: 100%;
+        overflow: hidden;
+        // border: 5px dashed white;
+        display: flex;
+        flex-direction: column;
+
+        //TODO: probably shouldnt be such ugly lol
+        .ng-star-inserted {
+            height: 100%;
+            max-height: 100%;
+            // overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            * {
+                height: initial;
+                overflow-y: initial;
+            }
+        }
     }
 }

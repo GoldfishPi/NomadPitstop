@@ -73,6 +73,9 @@ router.get('/:id', (req, res, next) => {
                         );
                     }
                 });
+                dom.window.document.querySelectorAll('p').forEach(p => {
+                    p.classList.add('paragraph');
+                })
                 res.json({
                     info: info,
                     content: dom.serialize()
