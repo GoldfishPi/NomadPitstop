@@ -10,7 +10,7 @@ import {
     bootstrap: [AppComponent],
 
     imports: [
-        BrowserModule.withServerTransition({ appId: 'app-root' }),
+        BrowserModule.withServerTransition({ appId: 'nomadpitstops' }),
 
         BrowserTransferStateModule,
 

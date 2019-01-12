@@ -26,6 +26,7 @@ import { NearcardComponent } from './components/near/nearcard/nearcard.component
 import { PitstopService } from './services/pitstop/pitstop.service';
 import { LandingComponent } from './components/landing/landing.component';
 import { BlogService } from './services/blog/blog.service';
+import { SocialShareComponent } from './components/social-share/social-share.component';
 
 const appRoutes: Routes = [
     { path: '', component: LandingComponent, data: { depth: 1 } },
@@ -55,16 +56,17 @@ export function tokenGetter() {
         BlogComponent,
         NearComponent,
         NearcardComponent,
-        LandingComponent
+        LandingComponent,
+        SocialShareComponent,
     ],
-    imports:[
- CommonModule,
-NgtUniversalModule,
- 
- TransferHttpCacheModule,
-HttpClientModule,
- 
-        BrowserModule.withServerTransition({ appId: 'nomadpitstops' }),
+    imports: [
+        CommonModule,
+        NgtUniversalModule,
+
+        TransferHttpCacheModule,
+        HttpClientModule,
+
+        // BrowserModule.withServerTransition({ appId: 'nomadpitstops' }),
         FormsModule,
         HttpClientModule,
         RouterModule.forRoot(
@@ -85,5 +87,6 @@ HttpClientModule,
         GooglePlaceModule
     ],
     providers: [AuthService, PitstopService, BlogService],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
