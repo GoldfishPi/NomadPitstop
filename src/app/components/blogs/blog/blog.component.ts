@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BlogService } from '../../../services/blog/blog.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-blog',
@@ -10,30 +11,27 @@ import { BlogService } from '../../../services/blog/blog.service';
 export class BlogComponent implements OnInit {
     title: String;
     content: String;
+    date: String;
     constructor(
         private route: ActivatedRoute,
         private blogService: BlogService
-    ) {}
+    ) {
+        // this.moment = moment.Moment = moment('')
+    }
 
     ngOnInit() {
         this.getBlog();
+        // this.moment = moment();
     }
     getBlog() {
         this.route.params.subscribe(params => {
-            if (this.blogService.getBlogFromStorage(params.id)) {
-                this.content = this.blogService.getBlogFromStorage(
-                    params.id
-                ).content;
-                this.title = this.blogService.getBlogFromStorage(
-                    params.id
-                ).info.title;
-            }
             this.blogService.getBlog(params.id).subscribe(data => {
                 this.title = data.info.title;
                 this.content = data.content;
-                console.log('got data', data);
+                this.date = moment(data.info.datePublished).format('MMMM DD, YYYY');
+                // console.log('got data', moment(data.info.datePublished).format('MMMM DD, YYYY'));
             });
-            console.log('route params', params);
+            // console.log('route params', moment(data.info.datePublished));
         });
     }
 }

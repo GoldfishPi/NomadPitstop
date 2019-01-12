@@ -25,19 +25,19 @@ export class MapComponent implements OnInit {
 
     ngOnInit() {
         console.log('hello!')
-        // this.addPitstops();
-        // this.router.params.subscribe(data => {
-        //     if(data.id) this.goToPitstop(data.id);
-        // });
+        this.addPitstops();
+        this.router.params.subscribe(data => {
+            if(data.id) this.goToPitstop(data.id);
+        });
     }
     constructor(@Inject(WINDOW) private window: Window, private pitstopService: PitstopService, private router: ActivatedRoute) {
         // navigator = window.navigator;
-        // navigator.geolocation.getCurrentPosition(
-        //     function(position) {
-        //         this.setScreenPosition(position.coords.longitude, position.coords.latitude)
-        //         return position;
-        //     }.bind(this)
-        // );
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                this.setScreenPosition(position.coords.longitude, position.coords.latitude)
+                return position;
+            }.bind(this)
+        );
     }
     onChooseLocation(e) {
         if (this.isMarkerPlaceable) {

@@ -8,11 +8,10 @@
                 <div></div>
             </div>
         </div>
-        <ul class="links {{ linksState }}" [@openItems]>
-            <li><a routerLink="/blog">Blog</a></li>
-            <li><a routerLink="/map">Map</a></li>
-            <li><a routerLink="nearme" class="near">Nearby</a></li>
-            <li><a routerLink="boohg" class="boogh">lol</a></li>
+        <div class="links {{ linksState }}" [@openItems]>
+            <div><a routerLink="/blog">Blog</a></div>
+            <div><a routerLink="/map">Map</a></div>
+            <div><a routerLink="nearme" class="near">Nearby</a></div>
             <!-- <li>
                 <a routerLink="/login"
                     >Log In</a
@@ -24,6 +23,6 @@
                     >Log Out</a
                 >
             </li> -->
-        </ul>
+        </div>
     </nav>
 </div>

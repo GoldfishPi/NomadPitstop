@@ -1,15 +1,36 @@
-.title {
-    padding: 1.5rem;
-    font-size: 4rem;
-}
-.content {
-    padding: 2rem;
-    font-size: 1.3rem;
-    .paragraph,p {
-        padding-bottom: 1.2rem;
-        text-indent: 3rem;
+.blog {
+    flex-grow: 1;
+    margin-top: 80px;
+    background-color: white;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 80px auto;
+    grid-template-areas: 
+                        '. . .'
+                        '. content .';
+    .social-bar {
+        grid-area: social;
+    }
+    .content {
+        grid-area: content;
+        font-family: 'Raleway', sans-serif;
+        .title {
+            font-size: 4rem;
+            // margin: 0px;
+            padding: 0px;
+            margin-bottom: 0px;
+        }
+        .date {
+            color: gray;
+            padding: 0px;
+            margin: 0px;
+        }
+        .body {
+            font-size: 1.3rem;
+            // background-color: red;
+            // text-indent: 3rem;
+            
+        }
     }
 }
-// @media only screen and (max-width: 1200px) {
-//     .
-// }

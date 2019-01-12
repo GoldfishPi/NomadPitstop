@@ -1,13 +1,13 @@
-<div class="head themed-text shadow-text">
-    <h3 class="title">- Blog -</h3>
-</div>
-<div class="posts" >
-    <a class="post" *ngFor="let post of posts" routerLink="{{post.id}}">
-        <div class="image">
-            <img src={{post.thumbnail}} alt="">
-        </div>
-        <div class="title">
-            <h1>{{post.title}}</h1>
-        </div>
-    </a>
+<div class="body">
+    <div class="head themed-text shadow-text">
+        <h3 class="title">- Blog -</h3>
+    </div>
+    <div class="posts">
+        <a class="post" *ngFor="let post of posts" routerLink="{{ post.id }}">
+            <div class="image"><img src="{{ post.thumbnail }}" alt="" /></div>
+            <div class="title">
+                <h1>{{ post.title }}</h1>
+            </div>
+        </a>
+    </div>
 </div>
