@@ -15,7 +15,6 @@ import { MapComponent } from './components/map/map.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from './services/auth.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BlogsComponent } from './components/blogs/blogs.component';
@@ -38,10 +37,6 @@ const appRoutes: Routes = [
     { path: 'pitstops/map/:id', component: MapComponent },
     { path: 'nearme', component: NearComponent }
 ];
-
-export function tokenGetter() {
-    return localStorage.getItem('id_token');
-}
 
 @NgModule({
     declarations: [
@@ -82,17 +77,17 @@ export function tokenGetter() {
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBl8LKxRF1gdmnZjW5NHf3DEHcGCa7AVzY'
         }),
-        JwtModule.forRoot({
-            config: {
-                tokenGetter: tokenGetter,
-                whitelistedDomains: ['localhost:3001'],
-                blacklistedRoutes: ['localhost:3001/auth/']
-            }
-        }),
+        // JwtModule.forRoot({
+        //     config: {
+        //         tokenGetter: tokenGetter,
+        //         whitelistedDomains: ['localhost:3001'],
+        //         blacklistedRoutes: ['localhost:3001/auth/']
+        //     }
+        // }),
         BrowserAnimationsModule,
         GooglePlaceModule
     ],
-    providers: [AuthService, PitstopService, BlogService],
+    providers: [PitstopService, BlogService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

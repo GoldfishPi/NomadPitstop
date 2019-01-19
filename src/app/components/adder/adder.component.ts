@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { Point } from '@agm/core/services/google-maps-types';
 import { PitstopService } from '../../services/pitstop/pitstop.service';
 import { Pitstop } from '../../interfaces/pitstop';
-import { AuthService } from '../../services/auth.service';
-
 @Component({
   selector: 'app-adder',
   templateUrl: './adder.component.html',
@@ -30,7 +28,7 @@ export class AdderComponent implements OnInit {
   @Input()
   point: Pitstop;
 
-  constructor(private router: Router, private pitstopService: PitstopService, private authService: AuthService) {}
+  constructor(private router: Router, private pitstopService: PitstopService) {}
 
   ngOnInit() {
   }

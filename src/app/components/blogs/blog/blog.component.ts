@@ -24,6 +24,7 @@ export class BlogComponent implements OnInit {
         // this.moment = moment();
     }
     getBlog() {
+        if(!this.route)return;
         this.route.params.subscribe(params => {
             this.blogService.getBlog(params.id).subscribe(data => {
                 this.title = data.info.title;

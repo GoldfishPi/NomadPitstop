@@ -11,7 +11,10 @@ import { Observable } from 'rxjs';
 export class BlogService {
     serverURL;
     httOptions;
-    constructor(@Inject(WINDOW) private window: Window, private http: HttpClient) {
+    constructor(
+        @Inject(WINDOW) private window: Window,
+        private http: HttpClient
+    ) {
         this.serverURL = environment.serverUrl;
         this.httOptions = {
             headers: new HttpHeaders({
@@ -20,28 +23,37 @@ export class BlogService {
         };
     }
     getBlogs() {
-        return new Observable((observer) => {
-            const {next, error, complete} = observer;
-            var blogs = JSON.parse(this.window.localStorage.getItem('blogs'));
-            if(blogs)observer.next(blogs);
+        return new Observable(observer => {
+            const { next, error, complete } = observer;
+            if (this.window.localStorage) {
+                var blogs = JSON.parse(
+                    this.window.localStorage.getItem('blogs')
+                );
+                if (blogs) observer.next(blogs);
+            }
+
             this.http
-            .get<Array<any>>(this.serverURL + '/blog', this.httOptions)
-            .pipe(map((res: any) => res))
-            .subscribe(data => {
-                try {
-                    this.window.localStorage.setItem('blogs', JSON.stringify(data));
-                } catch (error) {
-                    
-                }
-                
-                observer.next(data)
-            })
-        })
+                .get<Array<any>>(this.serverURL + '/blog', this.httOptions)
+                .pipe(map((res: any) => res))
+                .subscribe(data => {
+                    try {
+                        this.window.localStorage.setItem(
+                            'blogs',
+                            JSON.stringify(data)
+                        );
+                    } catch (error) {}
+
+                    observer.next(data);
+                });
+        });
         // return this.http
         //     .get<Array<any>>(this.serverURL + '/blog', this.httOptions)
         //     .pipe(map((res: any) => res));
     }
     getBlogFromStorage(id) {
+        if (this.window.localStorage) {
+            
+        }
         var blog = JSON.parse(this.window.localStorage.getItem(`blog:${id}`));
         console.log('blog', blog);
         return blog;
