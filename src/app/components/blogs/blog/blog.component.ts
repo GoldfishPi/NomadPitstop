@@ -29,7 +29,7 @@ export class BlogComponent implements OnInit {
             this.blogService.getBlog(params.id).subscribe(data => {
                 this.title = data.info.title;
                 this.content = data.content;
-                this.date = moment(data.info.datePublished).format('MMMM DD, YYYY');
+                // this.date = moment(data.info.datePublished).format('MMMM DD, YYYY');
                 // console.log('got data', moment(data.info.datePublished).format('MMMM DD, YYYY'));
             });
             // console.log('route params', moment(data.info.datePublished));
