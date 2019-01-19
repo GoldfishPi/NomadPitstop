@@ -1,185 +1,69 @@
 @import '../../less/main.less';
-@keyframes grain {
-    0%,
-    100% {
-        transform: translate(0, 0);
-    }
-    10% {
-        transform: translate(-5%, -10%);
-    }
-    20% {
-        transform: translate(-15%, 5%);
-    }
-    30% {
-        transform: translate(7%, -25%);
-    }
-    40% {
-        transform: translate(-5%, 25%);
-    }
-    50% {
-        transform: translate(-15%, 10%);
-    }
-    60% {
-        transform: translate(15%, 0%);
-    }
-    70% {
-        transform: translate(0%, 15%);
-    }
-    80% {
-        transform: translate(3%, 35%);
-    }
-    90% {
-        transform: translate(-10%, 10%);
-    }
-}
-.container {
-    // height: 100vh;
-    // overflow: hidden;
-}
-.wrap {
-    // height: 100vh;
+.main {
+    @pitstopWidth:25vw;
+    position: relative;
+    margin-top: 80px;
+    height: 100%;
+    background:@background-light;
+    overflow-y: auto;
     display: grid;
-    // grid-template-columns: 1fr 1fr 1fr;
-    overflow: hidden;
-    * {
-        overflow-y: hidden;
-    }
-    // grid-gap: 1.2rem;
-    grid-template-areas:
-        'hook hook hook hook'
-        'hook hook hook hook'
-        'hook hook hook hook'
-        'hook hook hook hook'
-        'about about  blog blog'
-        'about about  blog blog'
-        'about about  blog blog'
-        'map map  blog blog'
-        'map map  blog blog'
-        'map map  blog blog';
-
-    .section {
-        overflow: hidden;
-    }
-    .hook {
-        grid-area: hook;
-        position: relative;
-        overflow: hidden;
-        .image {
-            width: 100%;
-            height: 100vh;
-            // height: auto;
-        }
-        .overlay {
-            left: -50%;
-            top: -150%;
-            position: absolute;
-            width: 300%;
-            height: 400%;
-            opacity: 0;
-            animation: grain 8s steps(10) infinite;
-        }
-        .image:after {
-            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/paper-pattern.png);
-            content: '';
-            width: 100px;
-            height: 100px;
-            opacity: 1;
-        }
-        .center {
-            position: absolute;
-            width: 100%;
-            bottom: 30%;
-            .phrase {
-                text-align: center;
-                font-size: 5rem;
-                border-top: 3rem double @contrast;
-                border-bottom: 3rem double @contrast;
-            }
-            .buttons {
-                margin-top: 40px;
-                width: 100%;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-around;
-                -webkit-user-select: none; /* Safari */
-                -moz-user-select: none; /* Firefox */
-                -ms-user-select: none; /* IE10+/Edge */
-                user-select: none; /* Standard */
-                .button-container {
-                    .bar {
-                        margin: auto;
-                        margin-top: 5px;
-                        width: 0%;
-                        height: 10px;
-                        background-color: @contrast;
-                        transition: width @transitionCubic;
-                    }
-                }
-                .button-container:hover {
-                    .bar {
-                        width: 100%;
-                    }
-                }
-                .button {
-                    text-decoration: none;
-                    font-size: 2rem;
-                    &:after {
-                        position: relative;
-                        content: ' ';
-                        background-color: red;
-                        width: 100%;
-                        height: 10px;
-                    }
-                }
-                .button:hover {
-                    &:after {
-                        content: ' ';
-                        background-color: red;
-                        width: 100%;
-                        height: 10px;
-                    }
-                }
-            }
-        }
-    }
-    .posts {
+    grid-template-columns: @pitstopWidth auto;
+    grid-template-areas: 'pitstops blog';
+    .blog {
         grid-area: blog;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        .heading {
-            color: @primary;
-            font-family: @fontPrimary;
-            padding-bottom: 20px;
-            border-bottom: 20px double @primary;
+        .blog-heading {
+            padding-left: 1rem;
         }
         .post {
-            cursor: pointer;
-            box-shadow: @shadow;
             margin: 1rem;
-            padding: 1rem;
-            background-color: @primary;
-            width: 20rem;
-            font-size: 1.3rem;
-            text-align: center;
-            transition: box-shadow @transitionCubic;
-        }
-        .post:hover {
-            box-shadow: @shadowLifted;
+            color: initial;
+            text-decoration: initial;
+            // font-family: 'Raleway';
+            .sub {
+                text-align: right;
+            }
+            .sub:hover {
+                text-decoration: underline;
+            }
         }
     }
-    .about {
-        height: 100vh;
-        .heading {
-            margin: 1.2rem;
+    .pitstops {
+        height: 100%;
+        width: @pitstopWidth;
+        position: fixed;
+        background-color: @background;
+        grid-area: pitstops;
+        overflow: hidden;
+        app-near {
+            // position: fixed;
+            height: 100%;
+            width: 100%;
         }
-        grid-area: about;
     }
-    .map {
-        height: 100vh;
-        .heading {
-            margin: 1.2rem;
+}
+
+@media screen and (max-width: @tablet) {
+    .main {
+        grid-template-columns: 40vw auto;
+        .pitstops {
+            width: 40vw;
         }
-        grid-area: map;
+    }
+}
+@media screen and (max-width: @tablet-small) {
+    .main {
+        grid-template-columns: 50vw auto;
+        .pitstops {
+            width: 50vw;
+        }
+    }
+}
+@media screen and (max-width: @mobile) {
+    .main {
+        grid-template-columns: 1fr;
+        .pitstops {
+            display: none;
+            visibility: hidden;
+        }
     }
 }

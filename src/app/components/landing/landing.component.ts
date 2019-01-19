@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../../services/blog/blog.service';
 import { Router } from '@angular/router';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-landing',
@@ -9,9 +10,10 @@ import { Router } from '@angular/router';
 })
 export class LandingComponent implements OnInit {
     blogs:Array<Object>;
-    constructor(private blogService: BlogService, private router: Router) {}
+    constructor(private blogService: BlogService, private router: Router, private meta: Meta) {}
 
     ngOnInit() {
+        this.meta.addTag({name:'description', content:''})
         this.getBlogs();
     }
 

@@ -1,12 +1,19 @@
 <div class="body">
     <div class="head themed-text shadow-text">
-        <h3 class="title">- Blog -</h3>
+        <h1 class="title">- Blog -</h1>
     </div>
     <div class="posts">
         <a class="post" *ngFor="let post of posts" routerLink="{{ post.id }}">
             <div class="image"><img src="{{ post.thumbnail }}" alt="" /></div>
             <div class="title">
-                <h1>{{ post.title }}</h1>
+                <p class="__text-heading">{{ post.title }}</p>
+                <div class="__text description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Quidem, dolorum, quia impedit quam quod placeat, blanditiis
+                    error iste dolore nobis consequuntur doloribus quasi dolorem
+                    fugiat voluptatibus reprehenderit eligendi saepe. Error.
+                </div>
+                <p class="__text-sub readmore">Read More</p>
             </div>
         </a>
     </div>

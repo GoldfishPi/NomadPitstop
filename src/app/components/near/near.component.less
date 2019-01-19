@@ -1,3 +1,4 @@
+@import '../../less/main.less';
 .places {
     pointer-events: all;
     // position: absolute;
@@ -6,23 +7,30 @@
     width: 90%;
     border: none;
     border-radius: 3px;
-    margin: .4rem;
+    margin: 0.4rem;
     padding: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     overflow: hidden;
-    
 }
-.cards {
-    height: 100%;
-    overflow: hidden;
-    position: absolute;
-    // overflow: auto;
-    // direction:ltr;
-}
+
 .wrap {
     display: flex;
     flex-direction: column;
     height: 100%;
     position: relative;
+    background-color: @background;
+    .cards {
+        padding: 1rem;
+        // margin-top: 1rem;
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+        // overflow: auto;
+        // direction:ltr;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { PitstopService } from '../../services/pitstop/pitstop.service';
 import { Pitstop } from '../../interfaces/pitstop';
@@ -12,6 +12,7 @@ export class NearComponent implements OnInit {
     @ViewChild('placesRef') placesRef: GooglePlaceDirective;
     pitstops: Array<Pitstop>;
 
+    @Input('locationFinder') locationFinder: Boolean;
     options = {};
     longitude: Number;
     latitude: Number;

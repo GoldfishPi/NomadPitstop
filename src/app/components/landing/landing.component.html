@@ -1,62 +1,23 @@
-<div class="container">
-    <div class="wrap">
-        <div class="hook section">
-            <img
-                class="overlay"
-                src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/paper-pattern.png"
-                alt=""
-            />
-            <img
-                class="image"
-                src="../../../assets/images/st-paul-868421_1920.jpg"
-                alt=""
-            />
-            <div class="center">
-                <div class="phrase __text-heading">
-                    Your Next Adventure
-                    <br>
-                    Starts Here
-                </div>
-                <div class="buttons">
-                    <div class="button-container">
-                        <div class="bar"></div>
-                        <a class="button __text-heading" routerLink="/blog">Blog</a>
-                        <div class="bar"></div>
-                    </div>
-                    <div class="button-container">
-                        <div class="bar"></div>
-                        <a class="button __text-heading" routerLink="/map">Map</a>
-                        <div class="bar"></div>
-                    </div>
-                    <div class="button-container">
-                        <div class="bar"></div>
-                        <a class="button __text-heading" routerLink="/login"
-                            >Log In</a
-                        >
-                        <div class="bar"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="posts section">
-            <h1 class="heading __text-heading">New Blog Posts!</h1>
-            <div
-                class="post"
-                *ngFor="let blog of blogs"
-                (click)="onRouteBlogPost($event, blog.id)"
-                routeId="blog.id"
-            >
-                <h3>{{ blog.title }}</h3>
-            </div>
-        </div>
-        <div class="about section">
-            <h1 class="heading __text-heading">What is Nomad Pit Stops?</h1>
-        </div>
-        <div class="map section">
-            <h1 class="heading __text-heading">Need somwhere to work?</h1>
-            <h1 class="heading __text-heading">
-                Check out our awesome pitstop map!
-            </h1>
-        </div>
+<div class="main">
+    <div class="pitstops">
+        <app-near></app-near>
+    </div>
+    <div class="blog">
+        <h1 class="__text-heading blog-heading">Recent Blog Posts</h1>
+        <a
+            *ngFor="let blog of blogs"
+            class="post __card __hoverable"
+            routerLink="blog/{{ blog.id }}"
+        >
+
+            <h2 class="__text-heading">{{ blog.title }}</h2>
+            <p class="__text snippet">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Maiores voluptate est minima, porro alias voluptatibus rerum
+                reiciendis error sapiente velit animi beatae soluta architecto
+                quos vitae distinctio nostrum possimus nulla?
+            </p>
+            <p class="__text-sub sub">Read More</p>
+        </a>
     </div>
 </div>
