@@ -26,6 +26,7 @@ import { PitstopService } from './services/pitstop/pitstop.service';
 import { LandingComponent } from './components/landing/landing.component';
 import { BlogService } from './services/blog/blog.service';
 import { SocialShareComponent } from './components/social-share/social-share.component';
+import { AboutComponent } from './components/about/about.component';
 
 const appRoutes: Routes = [
     { path: '', component: LandingComponent, data: { depth: 1 } },
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     { path: 'blog', component: BlogsComponent },
     { path: 'blog/:id', component: BlogComponent },
     { path: 'pitstops/map/:id', component: MapComponent },
-    { path: 'nearme', component: NearComponent }
+    { path: 'nearme', component: NearComponent },
+    { path: 'about', component: AboutComponent }
 ];
 
 @NgModule({
@@ -52,7 +54,8 @@ const appRoutes: Routes = [
         NearComponent,
         NearcardComponent,
         LandingComponent,
-        SocialShareComponent
+        SocialShareComponent,
+        AboutComponent,
     ],
     imports: [
         CommonModule,
