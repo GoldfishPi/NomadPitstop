@@ -1,20 +1,21 @@
 .blog {
     flex-grow: 1;
-    
+
     background-color: white;
     overflow: auto;
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-rows: 80px auto;
-    grid-template-areas: 
-                        '. . .'
-                        '. content .';
+    grid-template-areas:
+        '. . .'
+        '. content .';
     .social-bar {
         grid-area: social;
     }
     .content {
         grid-area: content;
         font-family: 'Raleway', sans-serif;
+
         .title {
             font-size: 4rem;
             // margin: 0px;
@@ -30,7 +31,20 @@
             font-size: 1.3rem;
             // background-color: red;
             // text-indent: 3rem;
-            
+        }
+    }
+    .content ::ng-deep {
+        .ql-align-right {
+            text-align: right;
+        }
+        .ql-align-center {
+            text-align: center;
+        }
+        .ql-align-left {
+            text-align: left;
+        }
+        img {
+            max-width: 100%;
         }
     }
 }

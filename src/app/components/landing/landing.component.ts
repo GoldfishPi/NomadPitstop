@@ -9,22 +9,24 @@ import { Meta } from '@angular/platform-browser';
     styleUrls: ['./landing.component.less']
 })
 export class LandingComponent implements OnInit {
-    blogs:Array<Object>;
-    constructor(private blogService: BlogService, private router: Router, private meta: Meta) {}
+    blogs: Array<Object>;
+    constructor(
+        private blogService: BlogService,
+        private router: Router,
+        private meta: Meta
+    ) {}
 
     ngOnInit() {
-        this.meta.addTag({name:'description', content:''})
+        this.meta.addTag({ name: 'description', content: '' });
         this.getBlogs();
     }
 
     getBlogs() {
-        this.blogService.getBlogs().subscribe((data:any) => {
-            console.log(data);
+        this.blogService.getBlogs().subscribe((data: any) => {
             this.blogs = data.posts;
         });
     }
     onRouteBlogPost(e, id) {
-        this.router.navigate([`/blog/${id}`])
-        // console.log('ok', e, scope)
+        this.router.navigate([`/blog/${id}`]);
     }
 }

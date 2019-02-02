@@ -1,12 +1,12 @@
 <div class="blog">
     <div class="social-bar">
         <!-- <app-social-share></app-social-share> -->
-        
     </div>
     <div class="content">
         <h1 class="title">{{ title }}</h1>
         <h3 class="date">{{ date }}</h3>
+        <h3 class="__text-sub">{{ author }}</h3>
         <app-social-share></app-social-share>
-        <div class="body" [innerHTML]="content"></div>
+        <div class="body" innerHTML="{{ body }}"></div>
     </div>
 </div>
