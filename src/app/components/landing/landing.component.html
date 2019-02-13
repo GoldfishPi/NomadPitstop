@@ -9,13 +9,9 @@
             class="post __card __hoverable"
             routerLink="blog/{{ blog.id }}"
         >
-
             <h2 class="__text-heading">{{ blog.title }}</h2>
             <p class="__text snippet">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Maiores voluptate est minima, porro alias voluptatibus rerum
-                reiciendis error sapiente velit animi beatae soluta architecto
-                quos vitae distinctio nostrum possimus nulla?
+                {{ blog.snippet }}
             </p>
             <p class="__text-sub sub">Read More</p>
         </a>

@@ -15,7 +15,7 @@ export class BlogComponent implements OnInit {
     author: String;
     body: String;
     date: String;
-    snippet: 'lorem ipsum';
+    snippet: String;
     constructor(
         private route: ActivatedRoute,
         private blogService: BlogService,
@@ -37,7 +37,13 @@ export class BlogComponent implements OnInit {
                 this.title = post.title;
                 this.author = post.author;
                 this.body = post.body;
-                console.log('params', this.router.url);
+                this.snippet = post.snippet;
+                if (post.dateCreated) {
+                    this.date = moment
+                        .unix(Number(post.dateCreated))
+                        .format('LL');
+                }
+                console.log('date', post.dateCreated);
                 this.setTags();
             });
             // console.log('route params', moment(data.info.datePublished));
