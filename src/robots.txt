@@ -1,0 +1,7 @@
+Sitemap: https://www.nomadpitstops.com/sitemap.xml
+User-Agent: *
+Allow: /
+Allow: /map
+Allow: /blog
+Disallow: /login
+Disallow: /logout
