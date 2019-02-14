@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../../services/blog/blog.service';
+import { BlogPost } from 'src/app/interfaces/blogPost';
 
 @Component({
     selector: 'app-blogs',
@@ -7,8 +8,7 @@ import { BlogService } from '../../services/blog/blog.service';
     styleUrls: ['./blogs.component.less']
 })
 export class BlogsComponent implements OnInit {
-
-    posts = [1,2,3,4,5,6,7,8,9,0,1,2,3,4,4,5,6,7,]
+    posts: Array<BlogPost>;
 
     constructor(private blogService: BlogService) {}
 
@@ -16,10 +16,8 @@ export class BlogsComponent implements OnInit {
         this.getPosts();
     }
     getPosts() {
-        this.blogService.getBlogs()
-            .subscribe((data:any) => {
-                console.log('ok')
-                this.posts = data.posts;
-            })
+        this.blogService
+            .getBlogs()
+            .subscribe((posts: Array<BlogPost>) => (this.posts = posts));
     }
 }

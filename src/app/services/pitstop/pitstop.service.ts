@@ -10,7 +10,11 @@ import { Observable } from 'rxjs';
 })
 export class PitstopService {
     httpOptions: Object;
-    constructor(@Inject(WINDOW) private window: Window, private http: HttpClient) {
+    pitstops: Array<Pitstop>;
+    constructor(
+        @Inject(WINDOW) private window: Window,
+        private http: HttpClient
+    ) {
         this.httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
@@ -32,12 +36,9 @@ export class PitstopService {
             )
             .pipe(map((res: any) => res));
     }
-
     getPitstops() {
         return new Observable(observer => {
-            if (this.window.localStorage.getItem('pitstops')) {
-                observer.next(JSON.parse(this.window.localStorage.getItem('pitstops')));
-            }
+            if (this.pitstops) return observer.next(this.pitstops);
             this.http
                 .get<Array<Pitstop>>(
                     environment.serverUrl + '/pitstops',
@@ -45,8 +46,8 @@ export class PitstopService {
                 )
                 .pipe(map((res: any) => res))
                 .subscribe(data => {
-                    this.window.localStorage.setItem('pitstops', JSON.stringify(data));
-                    observer.next(data);
+                    this.pitstops = data;
+                    observer.next(this.pitstops);
                 });
         });
     }
@@ -66,7 +67,11 @@ export class PitstopService {
     getNearPitstops(options) {
         return new Observable(observer => {
             if (this.window.localStorage.getItem('pitstops:near')) {
-                observer.next(JSON.parse(this.window.localStorage.getItem('pitstops:near')));
+                observer.next(
+                    JSON.parse(
+                        this.window.localStorage.getItem('pitstops:near')
+                    )
+                );
             }
             this.http
                 .post<Array<Pitstop>>(
@@ -76,9 +81,12 @@ export class PitstopService {
                 )
                 .pipe(map(res => res))
                 .subscribe(data => {
-                    this.window.localStorage.setItem('pitstops:near', JSON.stringify(data));
+                    this.window.localStorage.setItem(
+                        'pitstops:near',
+                        JSON.stringify(data)
+                    );
                     observer.next(data);
-                })
+                });
         });
     }
     internetWords(val) {

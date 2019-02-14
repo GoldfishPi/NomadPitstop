@@ -13,6 +13,7 @@ export class NearComponent implements OnInit {
     pitstops: Array<Pitstop>;
 
     @Input('locationFinder') locationFinder: Boolean;
+    @Input('findAll') findAll: Boolean;
     options = {};
     longitude: Number;
     latitude: Number;
@@ -20,11 +21,12 @@ export class NearComponent implements OnInit {
     constructor(private pitStopServerice: PitstopService) {}
 
     ngOnInit() {
+        if (this.findAll) return this.getAllPitstops();
         navigator.geolocation.getCurrentPosition(
             function(position) {
                 this.longitude = position.coords.longitude;
                 this.latitude = position.coords.latitude;
-                this.getPitstops()
+                this.getPitstops();
                 return position;
             }.bind(this)
         );
@@ -33,14 +35,15 @@ export class NearComponent implements OnInit {
     handleAddressChange(event) {}
 
     getPitstops() {
-        this.pitStopServerice.getNearPitstops({
-            longitude: this.longitude,
-            latitude: this.latitude,
-            radius: 5,
-        })
-        .subscribe((data:Array<Pitstop>) => {
-            this.pitstops = data;
-        })
+        this.pitStopServerice
+            .getNearPitstops({
+                longitude: this.longitude,
+                latitude: this.latitude,
+                radius: 5
+            })
+            .subscribe((data: Array<Pitstop>) => {
+                this.pitstops = data;
+            });
         // this.pitStopServerice.getPitstops().subscribe(data => {
         //     this.pitstops = data;
         //     this.pitstops.map(data => {
@@ -48,6 +51,13 @@ export class NearComponent implements OnInit {
         //     })
         //     console.log('got these gosh darn pitstops', this.pitstops)
         // });
-
+    }
+    getAllPitstops() {
+        return this.pitStopServerice
+            .getPitstops()
+            .subscribe((data: Array<Pitstop>) => {
+                console.log('data', data);
+                this.pitstops = data;
+            });
     }
 }
