@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../../services/blog/blog.service';
 import { BlogPost } from '../../interfaces/blogPost';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-blogs',
@@ -10,9 +11,13 @@ import { BlogPost } from '../../interfaces/blogPost';
 export class BlogsComponent implements OnInit {
     posts: Array<BlogPost>;
 
-    constructor(private blogService: BlogService) {}
+    constructor(
+        private blogService: BlogService,
+        private titleService: Title
+    ) {}
 
     ngOnInit() {
+        this.titleService.setTitle('Nomad Pit Stops | Blog');
         this.getPosts();
     }
     getPosts() {

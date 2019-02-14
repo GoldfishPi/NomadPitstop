@@ -27,6 +27,8 @@ import { LandingComponent } from './components/landing/landing.component';
 import { BlogService } from './services/blog/blog.service';
 import { SocialShareComponent } from './components/social-share/social-share.component';
 import { AboutComponent } from './components/about/about.component';
+import { AuthService } from './services/auth/auth.service';
+import { ApiService } from './services/api/api.service';
 
 const appRoutes: Routes = [
     { path: '', component: LandingComponent, data: { depth: 1 } },
@@ -55,7 +57,7 @@ const appRoutes: Routes = [
         NearcardComponent,
         LandingComponent,
         SocialShareComponent,
-        AboutComponent,
+        AboutComponent
     ],
     imports: [
         CommonModule,
@@ -90,7 +92,7 @@ const appRoutes: Routes = [
         BrowserAnimationsModule,
         GooglePlaceModule
     ],
-    providers: [PitstopService, BlogService],
+    providers: [PitstopService, BlogService, AuthService, ApiService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BlogService } from '../../../services/blog/blog.service';
 import * as moment from 'moment';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { post } from 'selenium-webdriver/http';
 import { BlogPost } from '../../../interfaces/blogPost';
 
@@ -22,7 +22,8 @@ export class BlogComponent implements OnInit {
         private route: ActivatedRoute,
         private blogService: BlogService,
         private meta: Meta,
-        private router: Router
+        private router: Router,
+        private titleService: Title
     ) {
         // this.moment = moment.Moment = moment('')
     }
@@ -53,6 +54,7 @@ export class BlogComponent implements OnInit {
         });
     }
     setTags() {
+        this.titleService.setTitle(String(this.title));
         this.meta.addTag({ name: 'og:title', content: String(this.title) });
         this.meta.addTag({
             name: 'descriptions',

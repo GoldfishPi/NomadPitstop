@@ -5,6 +5,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { BlogPost } from '../../interfaces/blogPost';
+import { ApiService } from '../api/api.service';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,7 @@ export class BlogService {
     blogPosts: Array<BlogPost> = [];
     constructor(
         @Inject(WINDOW) private window: Window,
-        private http: HttpClient
+        private api: ApiService
     ) {
         this.serverURL = environment.serverUrl;
         this.httOptions = {
@@ -26,16 +27,12 @@ export class BlogService {
     }
     getBlogs() {
         return new Observable(observer => {
-            const { next, error, complete } = observer;
             if (this.blogPosts.length) return observer.next(this.blogPosts);
-            this.http
-                .get<Array<any>>(this.serverURL + '/blog', this.httOptions)
-                .pipe(map((res: any) => res))
-                .subscribe(data => {
-                    this.blogPosts = data.posts;
-                    this.sortPosts();
-                    observer.next(this.blogPosts);
-                });
+            this.api.get('/blog', {}).subscribe(data => {
+                this.blogPosts = data.posts;
+                this.sortPosts();
+                observer.next(this.blogPosts);
+            });
         });
     }
     getBlog(id: String) {
@@ -46,9 +43,8 @@ export class BlogService {
             if (post && post.body) {
                 return observer.next(post);
             }
-            return this.http
-                .get<Object>(this.serverURL + '/blog/' + id, this.httOptions)
-                .pipe(map((res: any) => res))
+            return this.api
+                .get('/blog/' + id, {})
                 .subscribe((data: BlogPost) => {
                     this.updateBlogPost(data);
                     observer.next(data);

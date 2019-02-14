@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../../services/blog/blog.service';
 import { Router } from '@angular/router';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { BlogPost } from '../../interfaces/blogPost';
 
 @Component({
@@ -14,11 +14,15 @@ export class LandingComponent implements OnInit {
     constructor(
         private blogService: BlogService,
         private router: Router,
-        private meta: Meta
+        private meta: Meta,
+        private titleService: Title
     ) {}
 
     ngOnInit() {
         this.meta.addTag({ name: 'description', content: '' });
+        this.titleService.setTitle(
+            `Nomad Pit Stops | A Digital Nomad's first stop`
+        );
         this.getBlogs();
     }
 

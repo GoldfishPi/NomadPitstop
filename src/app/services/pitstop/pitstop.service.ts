@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Pitstop } from '../../interfaces/pitstop';
 import { environment } from './../../../environments/environment';
 import { Observable } from 'rxjs';
+import { ApiService } from '../api/api.service';
 @Injectable({
     providedIn: 'root'
 })
@@ -13,7 +14,8 @@ export class PitstopService {
     pitstops: Array<Pitstop>;
     constructor(
         @Inject(WINDOW) private window: Window,
-        private http: HttpClient
+        private http: HttpClient,
+        private api: ApiService
     ) {
         this.httpOptions = {
             headers: new HttpHeaders({
@@ -28,41 +30,19 @@ export class PitstopService {
                 'Content-Type': 'application/json'
             })
         };
-        return this.http
-            .post<Pitstop>(
-                environment.serverUrl + '/pitstops',
-                pitstop,
-                httpOptions
-            )
-            .pipe(map((res: any) => res));
+        return this.api.post('/pitstops', pitstop, {});
     }
     getPitstops() {
         return new Observable(observer => {
             if (this.pitstops) return observer.next(this.pitstops);
-            this.http
-                .get<Array<Pitstop>>(
-                    environment.serverUrl + '/pitstops',
-                    this.httpOptions
-                )
-                .pipe(map((res: any) => res))
-                .subscribe(data => {
-                    this.pitstops = data;
-                    observer.next(this.pitstops);
-                });
+            this.api.get('/pitstops', {}).subscribe(data => {
+                this.pitstops = data;
+                observer.next(this.pitstops);
+            });
         });
     }
     getPitstopById(id) {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json'
-            })
-        };
-        return this.http
-            .get<Pitstop>(
-                environment.serverUrl + '/pitstops/' + id,
-                httpOptions
-            )
-            .pipe(map((res: any) => res));
+        return this.api.get('/pitstops/', {});
     }
     getNearPitstops(options) {
         return new Observable(observer => {
@@ -73,20 +53,13 @@ export class PitstopService {
                     )
                 );
             }
-            this.http
-                .post<Array<Pitstop>>(
-                    environment.serverUrl + '/pitstops/radius/',
-                    options,
-                    this.httpOptions
-                )
-                .pipe(map(res => res))
-                .subscribe(data => {
-                    this.window.localStorage.setItem(
-                        'pitstops:near',
-                        JSON.stringify(data)
-                    );
-                    observer.next(data);
-                });
+            this.api.post('/pitstops/radius/', options, {}).subscribe(data => {
+                this.window.localStorage.setItem(
+                    'pitstops:near',
+                    JSON.stringify(data)
+                );
+                observer.next(data);
+            });
         });
     }
     internetWords(val) {
