@@ -57,7 +57,7 @@ export class BlogComponent implements OnInit {
         this.titleService.setTitle(String(this.title));
         this.meta.addTag({ name: 'og:title', content: String(this.title) });
         this.meta.addTag({
-            name: 'descriptions',
+            name: 'description',
             content: String(this.snippet)
         });
         this.meta.addTag({

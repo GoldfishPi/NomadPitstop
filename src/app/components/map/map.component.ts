@@ -1,5 +1,12 @@
 import { WINDOW } from '@ng-toolkit/universal';
-import { Component, OnInit, Output, EventEmitter, ViewChild , Inject} from '@angular/core';
+import {
+    Component,
+    OnInit,
+    Output,
+    EventEmitter,
+    ViewChild,
+    Inject
+} from '@angular/core';
 import { User } from '../../interfaces/user';
 import { Point } from '../../interfaces/point';
 import { PitstopService } from '../../services/pitstop/pitstop.service';
@@ -19,22 +26,54 @@ export class MapComponent implements OnInit {
     markerPlaced = false;
     defaultUI = false;
     isMarkerPlaceable = false;
+    userCords = {
+        longitude: Number,
+        latitude: Number
+    };
 
     markers: Array<Pitstop>;
     point: Point;
 
     ngOnInit() {
-        console.log('hello!')
+        this.pitstopService.changeFocus.subscribe(data => {
+            this.setScreenPosition(data.longitude, data.latitude);
+        });
         this.addPitstops();
         this.router.params.subscribe(data => {
-            if(data.id) this.goToPitstop(data.id);
+            if (data.id)
+                this.pitstopService
+                    .getPitstopById(data.id)
+                    .subscribe((pitstop: Pitstop) => {
+                        pitstop = pitstop[0];
+                        this.pitstopService.setFocus(
+                            pitstop.longitude,
+                            pitstop.latitude
+                        );
+                    });
         });
     }
-    constructor(@Inject(WINDOW) private window: Window, private pitstopService: PitstopService, private router: ActivatedRoute) {
+    constructor(
+        @Inject(WINDOW) private window: Window,
+        private pitstopService: PitstopService,
+        private router: ActivatedRoute
+    ) {
         // navigator = window.navigator;
         navigator.geolocation.getCurrentPosition(
             function(position) {
-                this.setScreenPosition(position.coords.longitude, position.coords.latitude)
+                if (this.pitstopService.getFocus()) {
+                    return this.setScreenPosition(
+                        this.pitstopService.getFocus().longitude,
+                        this.pitstopService.getFocus().latitude
+                    );
+                }
+                this.userCords = {
+                    longitude: position.coords.longitude,
+                    latitude: position.coords.latitude
+                };
+                this.setScreenPosition(
+                    position.coords.longitude,
+                    position.coords.latitude
+                );
                 return position;
             }.bind(this)
         );
@@ -51,17 +90,14 @@ export class MapComponent implements OnInit {
         this.isMarkerPlaceable = e;
     }
     addPitstops() {
-        let pitstops = this.pitstopService.getPitstops().subscribe((data:any) => {
-            this.markers = data;
-        });
+        let pitstops = this.pitstopService
+            .getPitstops()
+            .subscribe((data: any) => {
+                this.markers = data;
+            });
     }
     setScreenPosition(longitude, latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
-    }
-    goToPitstop(id) {
-        this.pitstopService.getPitstopById(id).subscribe(data => {
-            this.setScreenPosition(data.longitude, data.latitude);
-        });
     }
 }

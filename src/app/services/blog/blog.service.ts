@@ -25,6 +25,13 @@ export class BlogService {
             })
         };
     }
+    preloadBlogs() {
+        this.getBlogs().subscribe(() => {
+            for (var i = 0; i < 3 && i < this.blogPosts.length; i++) {
+                this.getBlog(this.blogPosts[i].id);
+            }
+        });
+    }
     getBlogs() {
         return new Observable(observer => {
             if (this.blogPosts.length) return observer.next(this.blogPosts);

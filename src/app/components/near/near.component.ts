@@ -10,7 +10,7 @@ import { Pitstop } from '../../interfaces/pitstop';
 })
 export class NearComponent implements OnInit {
     @ViewChild('placesRef') placesRef: GooglePlaceDirective;
-    pitstops: Array<Pitstop>;
+    pitstops: Array<Pitstop> = [];
 
     @Input('locationFinder') locationFinder: Boolean;
     @Input('findAll') findAll: Boolean;
@@ -21,6 +21,10 @@ export class NearComponent implements OnInit {
     constructor(private pitStopServerice: PitstopService) {}
 
     ngOnInit() {
+        // console.log('this.pitstops', this.pitstops);
+        this.pitStopServerice.updatePitstop.subscribe((pitstop: Pitstop) => {
+            this.pitstops.push(pitstop);
+        });
         if (this.findAll) return this.getAllPitstops();
         navigator.geolocation.getCurrentPosition(
             function(position) {
@@ -32,7 +36,16 @@ export class NearComponent implements OnInit {
         );
     }
 
-    handleAddressChange(event) {}
+    handleAddressChange(event) {
+        console.log(
+            event.geometry.location.lat(),
+            event.geometry.location.lng()
+        );
+        this.pitStopServerice.setFocus(
+            event.geometry.location.lng(),
+            event.geometry.location.lat()
+        );
+    }
 
     getPitstops() {
         this.pitStopServerice

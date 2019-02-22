@@ -1,17 +1,22 @@
 import { WINDOW } from '@ng-toolkit/universal';
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, Output, EventEmitter } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Pitstop } from '../../interfaces/pitstop';
 import { environment } from './../../../environments/environment';
 import { Observable } from 'rxjs';
 import { ApiService } from '../api/api.service';
+// import { EventEmitter } from 'protractor';
 @Injectable({
     providedIn: 'root'
 })
 export class PitstopService {
     httpOptions: Object;
     pitstops: Array<Pitstop>;
+    longitude: Number;
+    latitude: Number;
+    changeFocus: EventEmitter<any> = new EventEmitter();
+    updatePitstop: EventEmitter<Pitstop> = new EventEmitter();
     constructor(
         @Inject(WINDOW) private window: Window,
         private http: HttpClient,
@@ -30,6 +35,7 @@ export class PitstopService {
                 'Content-Type': 'application/json'
             })
         };
+        this.updatePitstop.emit(pitstop);
         return this.api.post('/pitstops', pitstop, {});
     }
     getPitstops() {
@@ -61,6 +67,21 @@ export class PitstopService {
                 observer.next(data);
             });
         });
+    }
+    setFocus(lon, lat) {
+        this.longitude = lon;
+        this.latitude = lat;
+        this.changeFocus.emit({
+            longitude: lon,
+            latitude: lat
+        });
+    }
+    getFocus() {
+        if (!this.longitude || !this.latitude) return false;
+        return {
+            longitude: this.longitude,
+            latitude: this.latitude
+        };
     }
     internetWords(val) {
         let out: string;

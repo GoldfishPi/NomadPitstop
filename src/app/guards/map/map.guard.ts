@@ -5,7 +5,7 @@ import {
     RouterStateSnapshot
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { MapComponent } from 'src/app/components/map/map.component';
+// import { MapComponent } from 'src/app/components/map/map.component';
 
 @Injectable({
     providedIn: 'root'

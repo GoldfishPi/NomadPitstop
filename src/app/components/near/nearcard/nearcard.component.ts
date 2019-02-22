@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PitstopService } from '../../../services/pitstop/pitstop.service';
 import { Pitstop } from '../../../interfaces/pitstop';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-nearcard',
@@ -16,17 +17,33 @@ export class NearcardComponent implements OnInit {
 
     @Input('pitstop') pitstop: Pitstop;
 
-    constructor(private pitstopServerice: PitstopService, private router: Router) {}
+    constructor(
+        private pitstopServerice: PitstopService,
+        private router: Router,
+        private location: Location
+    ) {}
 
     ngOnInit() {
         this.name = this.pitstop.name;
-        this.connection = this.pitstopServerice.internetWords(this.pitstop.connection);
+        this.connection = this.pitstopServerice.internetWords(
+            this.pitstop.connection
+        );
         this.notes = this.pitstop.notes;
         this.id = this.pitstop.id;
-        console.log('somthings been created')
     }
     onClick() {
-        this.router.navigateByUrl('/pitstops/map/'+this.id);
-        console.log('ive been clicked')
+        console.log('does this even work');
+        this.pitstopServerice.setFocus(
+            this.pitstop.longitude,
+            this.pitstop.latitude
+        );
+        // this.pitstopServerice
+        //     .getPitstopById(this.id)
+        //     .subscribe((pitstop: Pitstop) => {
+        //         // location.go('/map/' + this.id);
+        //         this.location.go('/map/' + this.id);
+        //         // this.router.navigate(['map', this.id]);
+        //         // this.router.navigateByUrl('/map/' + this.id);
+        //     });
     }
 }

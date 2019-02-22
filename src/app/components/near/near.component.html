@@ -1,13 +1,13 @@
 <div class="wrap">
-    <input
-        *ngIf="locationFinder"
-        ngx-google-places-autocomplete
-        [options]="options"
-        #placesRef="ngx-places"
-        (onAddressChange)="handleAddressChange($event)"
-        class="places"
-    />
     <div class="cards">
+        <input
+            *ngIf="locationFinder"
+            ngx-google-places-autocomplete
+            [options]="options"
+            #placesRef="ngx-places"
+            (onAddressChange)="handleAddressChange($event)"
+            class="places"
+        />
         <div class="nearby" *ngFor="let pitstop of pitstops">
             <app-nearcard [pitstop]="pitstop"></app-nearcard>
         </div>

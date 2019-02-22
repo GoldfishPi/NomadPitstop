@@ -29,6 +29,7 @@ import { SocialShareComponent } from './components/social-share/social-share.com
 import { AboutComponent } from './components/about/about.component';
 import { AuthService } from './services/auth/auth.service';
 import { ApiService } from './services/api/api.service';
+import { MapGuard } from './guards/map/map.guard';
 
 const appRoutes: Routes = [
     { path: '', component: LandingComponent, data: { depth: 1 } },
@@ -37,7 +38,7 @@ const appRoutes: Routes = [
     { path: 'signup', component: SignupComponent, data: { depth: 3 } },
     { path: 'blog', component: BlogsComponent },
     { path: 'blog/:id', component: BlogComponent },
-    { path: 'pitstops/map/:id', component: MapComponent },
+    { path: 'map/:id', component: MapComponent, pathMatch: 'full' },
     { path: 'nearme', component: NearComponent },
     { path: 'about', component: AboutComponent }
 ];
