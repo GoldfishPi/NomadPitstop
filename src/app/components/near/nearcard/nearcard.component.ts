@@ -37,13 +37,10 @@ export class NearcardComponent implements OnInit {
             this.pitstop.longitude,
             this.pitstop.latitude
         );
-        // this.pitstopServerice
-        //     .getPitstopById(this.id)
-        //     .subscribe((pitstop: Pitstop) => {
-        //         // location.go('/map/' + this.id);
-        //         this.location.go('/map/' + this.id);
-        //         // this.router.navigate(['map', this.id]);
-        //         // this.router.navigateByUrl('/map/' + this.id);
-        //     });
+        this.location.go('/map/' + this.pitstop.id);
+        console.log('url', this.router.url);
+        if (this.router.url.indexOf('map') <= 0) {
+            this.router.navigate(['map', this.pitstop.id]);
+        }
     }
 }

@@ -38,7 +38,7 @@ const appRoutes: Routes = [
     { path: 'signup', component: SignupComponent, data: { depth: 3 } },
     { path: 'blog', component: BlogsComponent },
     { path: 'blog/:id', component: BlogComponent },
-    { path: 'map/:id', component: MapComponent, pathMatch: 'full' },
+    { path: 'map/:id', component: MapComponent },
     { path: 'nearme', component: NearComponent },
     { path: 'about', component: AboutComponent }
 ];

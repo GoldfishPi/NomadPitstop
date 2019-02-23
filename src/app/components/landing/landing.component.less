@@ -5,12 +5,13 @@
 
     height: 100%;
     background: @background-light;
-    overflow-y: auto;
+    // overflow-y: auto;
     display: grid;
     grid-template-columns: @pitstopWidth auto;
     grid-template-areas: 'pitstops blog';
     .blog {
         grid-area: blog;
+        overflow-y: auto;
         .blog-heading {
             padding-left: 1rem;
         }
@@ -28,19 +29,25 @@
             }
         }
     }
-    // .pitstops {
-    //     // height: 100%;
-    //     width: @pitstopWidth;
-    //     // position: fixed;
-    //     background-color: @background;
-    //     grid-area: pitstops;
-    //     overflow: hidden;
-    //     app-near {
-    //         // position: fixed;
-    //         // height: 100%;
-    //         // width: 100%;
-    //     }
-    // }
+    .pitstops {
+        height: 100%;
+        width: @pitstopWidth;
+        // position: fixed;
+        background-color: @background;
+        grid-area: pitstops;
+        overflow: hidden;
+        // display: flex;
+        // flex-flow: column;
+        // flex-grow: 1;
+        border-bottom: 3px solid green;
+        padding: 0;
+        // overflow-y: scroll;
+        app-near {
+            // position: fixed;
+            // height: 100%;
+            // width: 100%;
+        }
+    }
 }
 
 @media screen and (max-width: @tablet) {

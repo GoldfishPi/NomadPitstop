@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from './../../../environments/environment';
 import { map } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,8 @@ import { map } from 'rxjs/operators';
 export class ApiService {
     constructor(
         @Inject(WINDOW) private window: Window,
-        private http: HttpClient
+        private http: HttpClient,
+        private authService: AuthService
     ) {}
     post(url: String, body: any, options: any) {
         options = options || {};
@@ -36,6 +38,6 @@ export class ApiService {
             .pipe(map((res: any) => res));
     }
     getToken() {
-        return 'lolol';
+        return this.authService.getToken();
     }
 }
