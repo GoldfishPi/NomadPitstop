@@ -1,0 +1,42 @@
+@import '../../../../less/main.less';
+@branchColor: @primary;
+@branchWidth: 4px;
+@fontSize: 1.2rem;
+
+ul.tree,
+ul.tree ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul.tree ul {
+    margin-left: 10px;
+}
+ul.tree li {
+    font-size: @fontSize;
+    margin: 0;
+    padding: 0 7px;
+    line-height: 20px;
+    // color: #369;
+    // margin: 1rem;
+    font-weight: bold;
+    border-left: @branchWidth solid @branchColor;
+}
+ul.tree li:last-child {
+    border-left: none;
+}
+ul.tree li:before {
+    position: relative;
+    top: -0.3em;
+    height: 3rem;
+    width: 12px;
+    color: white;
+    border-bottom: @branchWidth solid @branchColor;
+    content: '';
+    display: inline-block;
+    left: -7px;
+}
+
+ul.tree li:last-child:before {
+    border-left: @branchWidth solid @branchColor;
+}

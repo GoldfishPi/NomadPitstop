@@ -1,0 +1,27 @@
+<div class="wrap">
+    <div class="info-row">
+        <input type="text" placeholder="Trip Title" />
+    </div>
+    <div class="main">
+        <app-dashboard-module class="__card hostels" name="Hostels">
+            <app-hostels></app-hostels>
+        </app-dashboard-module>
+        <app-dashboard-module class="__card workspaces" name="Workspaces">
+            <app-workspaces></app-workspaces>
+        </app-dashboard-module>
+
+        <app-dashboard-module class="__card weather" name="Weather">
+            <app-weather></app-weather>
+        </app-dashboard-module>
+        <app-dashboard-module class="__card destinations" name="Destinations">
+            <app-destinations></app-destinations>
+        </app-dashboard-module>
+        <app-dashboard-module
+            class="__card timeline"
+            name="Timeline"
+            edit="true"
+        >
+            <app-timeline></app-timeline>
+        </app-dashboard-module>
+    </div>
+</div>

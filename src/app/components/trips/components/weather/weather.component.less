@@ -1,0 +1,35 @@
+@import '../../../../less/main.less';
+@-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}
+.wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .weather {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        .wi {
+            font-size: 6rem;
+            -webkit-animation: rotation 10s infinite linear;
+            color: @primary;
+        }
+        .temp {
+            .bar {
+                height: 1px;
+                background-color: @text-contrast;
+            }
+            .c {
+                color: @text-contrast;
+            }
+            font-size: 4rem;
+            font-weight: bold;
+        }
+    }
+}

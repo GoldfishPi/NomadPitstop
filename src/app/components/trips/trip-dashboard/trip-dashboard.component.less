@@ -1,0 +1,87 @@
+@import '../../../less/main.less';
+.wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    .info-row {
+        background-color: @background-light;
+        padding: 1rem;
+        padding-bottom: 0;
+        box-sizing: border-box;
+        input {
+            padding: 0.5rem;
+            font-size: 2rem;
+            border: 0;
+            background-color: unset;
+            border-bottom: 2px solid @primary;
+        }
+    }
+    .main {
+        // height: 100%;
+        flex-grow: 1;
+        width: 100%;
+        background-color: @background-light;
+        box-sizing: border-box;
+        padding: 1rem;
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+            't w e '
+            't d h ';
+        // grid-template-columns: 1fr 1fr 1fr 1fr;
+        // grid-gap: 1rem;
+        // grid-template-areas:
+        //     't w h e'
+        //     't w h .'
+        //     't w h .';
+        .hostels {
+            grid-area: h;
+        }
+        .workspaces {
+            grid-area: w;
+        }
+        .weather {
+            grid-area: e;
+        }
+        .timeline {
+            grid-area: t;
+        }
+        .destinations {
+            grid-area: d;
+        }
+    }
+}
+@media screen and (max-width: 100em) {
+    .wrap .main {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+            't w e '
+            't d h ';
+    }
+}
+@media screen and (max-width: 70em) {
+    .wrap .main {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            't e'
+            't d'
+            'w h';
+    }
+}
+@media screen and (max-width: 45em) {
+    .wrap .main {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'e'
+            't'
+            't'
+            'd'
+            'd'
+            'h'
+            'h'
+            'w'
+            'w';
+    }
+}

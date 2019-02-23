@@ -29,7 +29,10 @@
                             "src/robots.txt",
                             "src/sitemap.xml"
                         ],
-                        "styles": ["src/styles.less"],
+                        "styles": [
+                            "src/styles.less",
+                            "./node_modules/weather-icons/css/weather-icons.css"
+                        ],
                         "scripts": []
                     },
                     "configurations": {
@@ -76,7 +79,10 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "src/tsconfig.spec.json",
                         "karmaConfig": "src/karma.conf.js",
-                        "styles": ["src/styles.less"],
+                        "styles": [
+                            "src/styles.less",
+                            "./node_modules/weather-icons/css/weather-icons.css"
+                        ],
                         "scripts": [],
                         "assets": [
                             "src/favicon.ico",

@@ -30,6 +30,16 @@ import { AboutComponent } from './components/about/about.component';
 import { AuthService } from './services/auth/auth.service';
 import { ApiService } from './services/api/api.service';
 import { MapGuard } from './guards/map/map.guard';
+import { TripDashboardComponent } from './components/trips/trip-dashboard/trip-dashboard.component';
+import { HostelsComponent } from './components/trips/components/hostels/hostels.component';
+import { HospitalityService } from './services/hospitality/hospitality.service';
+import { WorkspacesComponent } from './components/trips/components/workspaces/workspaces.component';
+import { WeatherComponent } from './components/trips/components/weather/weather.component';
+import { Ng2WeatherIconsModule } from 'ng2-weather-icons';
+import { DashboardModuleComponent } from './components/trips/trip-dashboard/dashboard-module/dashboard-module.component';
+import { DestinationsComponent } from './components/trips/components/destinations/destinations.component';
+import { TimelineComponent } from './components/trips/components/timeline/timeline.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 const appRoutes: Routes = [
     { path: '', component: LandingComponent, data: { depth: 1 } },
@@ -40,7 +50,8 @@ const appRoutes: Routes = [
     { path: 'blog/:id', component: BlogComponent },
     { path: 'map/:id', component: MapComponent, pathMatch: 'full' },
     { path: 'nearme', component: NearComponent },
-    { path: 'about', component: AboutComponent }
+    { path: 'about', component: AboutComponent },
+    { path: 'trip', component: TripDashboardComponent }
 ];
 
 @NgModule({
@@ -58,7 +69,15 @@ const appRoutes: Routes = [
         NearcardComponent,
         LandingComponent,
         SocialShareComponent,
-        AboutComponent
+        AboutComponent,
+        TripDashboardComponent,
+        HostelsComponent,
+        WorkspacesComponent,
+        WeatherComponent,
+        DashboardModuleComponent,
+        DestinationsComponent,
+        TimelineComponent,
+        ModalComponent
     ],
     imports: [
         CommonModule,
@@ -72,6 +91,8 @@ const appRoutes: Routes = [
 
         TransferHttpCacheModule,
         HttpClientModule,
+
+        Ng2WeatherIconsModule,
 
         // .withServerTransition({ appId: 'nomadpitstops' }),
         FormsModule,
@@ -93,7 +114,13 @@ const appRoutes: Routes = [
         BrowserAnimationsModule,
         GooglePlaceModule
     ],
-    providers: [PitstopService, BlogService, AuthService, ApiService],
+    providers: [
+        PitstopService,
+        BlogService,
+        AuthService,
+        ApiService,
+        HospitalityService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
